@@ -17,7 +17,7 @@ class CreateCellsTable extends Migration
             $table->id();
             $table->integer('sector_id')->nullable();
             $table->string('cell_name')->nullable();
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

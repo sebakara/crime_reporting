@@ -2,7 +2,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="">
+        <a class="nav-link " href="{{route('admin.dashboard')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -14,12 +14,12 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="police_account.view.php">
+            <a href="{{route('admin.account.police')}}">
               <i class="bi bi-circle"></i><span>Police</span>
             </a>
           </li>
           <li>
-            <a href="cpc_account.view.php">
+            <a href="{{route('admin.account.community')}}">
               <i class="bi bi-circle"></i><span>CPC</span>
             </a>
           </li>
@@ -32,12 +32,12 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="manage_police.view.php">
+            <a href="{{route('admin.manage.police')}}">
               <i class="bi bi-circle"></i><span>Police</span>
             </a>
           </li>
           <li>
-            <a href="manage_cpc.view.php">
+            <a href="{{route('admin.manage.community')}}">
               <i class="bi bi-circle"></i><span>CPC</span>
             </a>
           </li>

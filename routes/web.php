@@ -27,15 +27,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group([ 'as' =>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=> ['auth','admin']],
 function(){
     Route::get('dashboard',[App\Http\Controllers\Admin\AdminController::class, 'index'])->name('dashboard');
-
 }
 );
 
+Route::get('admin/create/police/account',[App\Http\Controllers\Admin\AdminController::class, 'police_account'])->name('admin.account.police');
+Route::get('admin/create/community/account',[App\Http\Controllers\Admin\AdminController::class, 'community_account'])->name('admin.account.community');
+Route::get('admin/manage/police',[App\Http\Controllers\Admin\AdminController::class, 'manage_police'])->name('admin.manage.police');
+Route::get('admin/manage/community',[App\Http\Controllers\Admin\AdminController::class, 'manage_community'])->name('admin.manage.community');
+Route::get('admin/get/sector_name/{district_id}',[App\Http\Controllers\Admin\AjaxController::class, 'getSectors']);
 //Police Router
 
 Route::group([ 'as' =>'police.','prefix'=>'police','namespace'=>'Police','middleware'=> ['auth','police']],
 function(){
     Route::get('dashboard',[App\Http\Controllers\Police\PoliceController::class, 'index'])->name('dashboard');
+
 
 }
 );

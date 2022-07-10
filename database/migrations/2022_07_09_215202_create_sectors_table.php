@@ -17,7 +17,7 @@ class CreateSectorsTable extends Migration
             $table->id();
             $table->integer('district_id')->nullable();
             $table->string('sector_name')->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
