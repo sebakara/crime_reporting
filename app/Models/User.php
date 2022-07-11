@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function addresses(){
 
-        return $this->hasMany('App\Models\District');
+        return $this->belongsTo('App\Models\District');
     }
 
     public function reports(){
