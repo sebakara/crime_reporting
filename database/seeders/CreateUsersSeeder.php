@@ -16,7 +16,6 @@ class CreateUsersSeeder extends Seeder
     {
         DB::table('users')->insert([
             'role_id'=>'1',
-            'address_id'=>'',
             'name'=> 'admin',
             'username'=>'admin',
             'email'=>'admin@gmail.com',

@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Address extends Model
 {
     use HasFactory;
-    
+
     public function users(){
 
         return $this->belongsTo('App\Models\User');
     }
 
-    public function addresses(){
+    public function reports(){
 
-        return $this->hasMany('App\Models\Address');
+        return $this->belongsTo('App\Models\Report');
     }
 }

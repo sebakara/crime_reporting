@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../../../assets/css/style.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
 
@@ -54,90 +55,96 @@
           <div class="card" >
             <div class="card-body" style="margin-left:70px">
               <h5 class="card-title text-center">Create Account Form</h5>
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
               <!-- General Form Elements -->
-              <form>
+              <form action="{{route('admin.store.community')}}" method="POST" enctype="multipart/form-data">
+              @csrf
                 <div class="row mb-3">
-                  
                   <div class="col-sm-10">
-                    <input type="text" placeholder="Enter Full Name" class="form-control">
+                    <input type="text" name="name" placeholder="Enter Full Name" class="form-control">
                   </div>
                 </div>
                 <div class="row mb-3">
                  
                   <div class="col-sm-10">
-                    <input type="text" placeholder="Enter Phone Number" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                 
-                  <div class="col-sm-10">
-                    <input type="text" placeholder="Enter Email Address" class="form-control">
-                  </div>
-                </div>
-
-                
-
-                <div class="row mb-3">
-                 
-                  <div class="col-sm-10">
-                    <input type="file" placeholder="Choose Profile" class="form-control">
+                    <input type="text" name="phone_number" placeholder="Enter Phone Number" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                  
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Select District</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Select Sector</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-
-                 <div class="row mb-3">
-                 
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Select Cell</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
+                    <input type="text" name="email" placeholder="Enter Email Address" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                  
                   <div class="col-sm-10">
-                    <input type="text" placeholder="Enter Username" class="form-control">
+                    <input type="file" name="profile_image" placeholder="Choose Profile" class="form-control">
                   </div>
                 </div>
 
                 <div class="row mb-3">
+              <div class="col-sm-10">
+                <select class="form-select" name="district_id" data-placeholder="Select District">
+                  <option label="Choose District"></option>
+                  @foreach($districts as $district)
+                  <option value="{{$district->id}}">{{$district->district_name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+             
+             <div class="col-sm-10">
+               <select class="form-select" name="sector_id" data-placeholder="Select Sector name">
+
+               </select>
+             </div>
+           </div>
+
+           <div class="row mb-3">
+             
+             <div class="col-sm-10">
+               <select class="form-select" name="cell_id" data-placeholder="Select Cell name">
+
+               </select>
+             </div>
+           </div>
+
+                <div class="row mb-3">
+                 
                   <div class="col-sm-10">
-                    <input type="password" placeholder="Enter Password" class="form-control">
+                    <input type="text" name="username" placeholder="Enter Username" class="form-control">
                   </div>
                 </div>
+
+                <div class="row mb-3">
+             
+             <div class="col-sm-10">
+             @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{!! \Session::get('success') !!}</li>
+                </ul>
+            </div>
+             @endif
+             </div>
+           </div>
                 
                 <div class="row mb-3 p-2" style="margin-left: 30px;">
                   <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Create Account</button>
-                    <button type="submit" class="btn btn-danger float-end">Cancel</button>
                   </div>
                 </div>
 
@@ -168,15 +175,68 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../../assets/vendor/chart.js/chart.min.js"></script>
-  <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
-  <script src="../../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+  <!-- Vendor JS Files -->
+  <script type="text/javascript">
+      
+      $(document).ready(function(){
+     $('select[name="district_id"]').on('change',function(){
+          var district_id = $(this).val();
+          //console.log(district_id);
+          if (district_id) {
+            
+            $.ajax({
+              url: "{{ url('/admin/get/sectorname/') }}/"+district_id,
+              type:"GET",
+              dataType:"json",
+              success:function(data) {
+              var d =$('select[name="sector_id"]').empty();
+              $.each(data, function(key, value){
+              
+              $('select[name="sector_id"]').append('<option value="'+ value.id + '">' + value.sector_name + '</option>');
 
+              });
+              },
+            });
+
+          }else{
+            alert('danger');
+          }
+
+            });
+      });
+
+ </script>
+
+ <script type="text/javascript">
+      
+      $(document).ready(function(){
+     $('select[name="sector_id"]').on('change',function(){
+          var sector_id = $(this).val();
+          if (sector_id) {
+            
+            $.ajax({
+              url: "{{ url('/admin/get/cellname/') }}/"+sector_id,
+              type:"GET",
+              dataType:"json",
+              success:function(data) {
+              var d =$('select[name="cell_id"]').empty();
+              $.each(data, function(key, value){
+              
+              $('select[name="cell_id"]').append('<option value="'+ value.id + '">' + value.cell_name + '</option>');
+
+              });
+              },
+            });
+
+          }else{
+            alert('danger');
+          }
+
+            });
+      });
+
+ </script>
+  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Template Main JS File -->
   <script src="../../../assets/js/main.js"></script>
 

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+  <title>Crime Report </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -35,18 +35,17 @@
 
   <!-- ======= Header ======= -->
   
-  @include('includes.admin.header')
+  @include('includes.community.header')
   <!-- ======= Sidebar ======= -->
-  @include('includes.admin.aside')
+  @include('includes.community.aside')
 <main id="main" class="main">
 
 <div class="pagetitle">
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-      <li class="breadcrumb-item">Create</li>
-        <li class="breadcrumb-item">Account</li>
-      <li class="breadcrumb-item active">Police</li>
+      <li class="breadcrumb-item"><a href="{{route('community.dashboard')}}">Home</a></li>
+      <li class="breadcrumb-item">Change</li>
+        <li class="breadcrumb-item">Password</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -56,7 +55,7 @@
     <div class="col-lg-6" style="margin-left: 280px;">
       <div class="card" >
         <div class="card-body" style="margin-left:70px">
-          <h5 class="card-title text-center">Create Account Form</h5>
+          <h5 class="card-title text-center">Change Password</h5>
           @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -67,54 +66,25 @@
                 </div>
               @endif
           <!-- General Form Elements -->
-          <form action="{{route('admin.store.police')}}" method="POST">
-          @csrf
+          <form action="{{route('community.update.password')}}" method="POST">
+          
           <div class="row mb-3">
               <div class="col-sm-10">
-                <input type="text" name="name" placeholder="Enter Full name" class="form-control">
+                <input type="password" name="current_password" placeholder="Enter Old Password" class="form-control">
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-10">
-                <input type="text" name="username" placeholder="Enter Username" class="form-control">
+                <input type="password" name="new_password" placeholder="Enter New Password" class="form-control">
               </div>
             </div>
             <div class="row mb-3">
              
               <div class="col-sm-10">
-                <input type="email" name="email" placeholder="Enter Email" class="form-control">
+                <input type="password" name="new_confirm_password" placeholder="Enter Confirm Password" class="form-control">
               </div>
             </div>
-          
-            <div class="row mb-3">
-              <div class="col-sm-10">
-                <select class="form-select" name="district_id" data-placeholder="Select District">
-                  <option label="Choose District"></option>
-                  @foreach($districts as $district)
-                  <option value="{{$district->id}}">{{$district->district_name}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-             
-             <div class="col-sm-10">
-               <select class="form-select" name="sector_id" data-placeholder="Select Sector name">
-
-               </select>
-             </div>
-           </div>
-
-           <div class="row mb-3">
-             
-             <div class="col-sm-10">
-               <select class="form-select" name="cell_id" data-placeholder="Select Cell name">
-
-               </select>
-             </div>
-           </div>
-
+         
            <div class="row mb-3">
              
              <div class="col-sm-10">
@@ -130,8 +100,7 @@
           
             <div class="row mb-3 p-2" style="margin-left: 30px;">
               <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Create Account</button>
-                <button type="submit" class="btn btn-danger float-end">Cancel</button>
+                <button type="submit" class="btn btn-primary">Update Password</button>
               </div>
             </div>
 
@@ -147,75 +116,16 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Patrick</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
      
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="">Patrick</a>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-   <script type="text/javascript">
-      
-      $(document).ready(function(){
-     $('select[name="district_id"]').on('change',function(){
-          var district_id = $(this).val();
-          //console.log(district_id);
-          if (district_id) {
-            
-            $.ajax({
-              url: "{{ url('/admin/get/sectorname/') }}/"+district_id,
-              type:"GET",
-              dataType:"json",
-              success:function(data) {
-              var d =$('select[name="sector_id"]').empty();
-              $.each(data, function(key, value){
-              
-              $('select[name="sector_id"]').append('<option value="'+ value.id + '">' + value.sector_name + '</option>');
-
-              });
-              },
-            });
-
-          }else{
-            alert('danger');
-          }
-
-            });
-      });
-
- </script>
-
- <script type="text/javascript">
-      
-      $(document).ready(function(){
-     $('select[name="sector_id"]').on('change',function(){
-          var sector_id = $(this).val();
-          if (sector_id) {
-            
-            $.ajax({
-              url: "{{ url('/admin/get/cellname/') }}/"+sector_id,
-              type:"GET",
-              dataType:"json",
-              success:function(data) {
-              var d =$('select[name="cell_id"]').empty();
-              $.each(data, function(key, value){
-              
-              $('select[name="cell_id"]').append('<option value="'+ value.id + '">' + value.cell_name + '</option>');
-
-              });
-              },
-            });
-
-          }else{
-            alert('danger');
-          }
-
-            });
-      });
-
- </script>
+   
   <!-- Vendor JS Files -->
   <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Template Main JS File -->

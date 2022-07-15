@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
     use HasFactory;
-    public function users(){
-        
-        return $this->hasMany('App\Models\User');
-    }
 
+    
     /** DISTRICT BELONGS TO MANY SECTOR */
 
     public function sectors(){

@@ -43,11 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /** ONE USER HAS MANY ADDRESS */
+    /** MANY USER HAS MANY ADDRESS */
 
     public function addresses(){
 
-        return $this->belongsTo('App\Models\District');
+        return $this->hasMany('App\Models\Address');
     }
 
     public function reports(){
