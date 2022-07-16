@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
+
 class LoginController extends Controller
 {
     /*
@@ -27,9 +28,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo ;
-
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
     /**
      * Create a new controller instance.
      *
@@ -37,15 +37,22 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        if(Auth::check() && Auth::user()->role->id == 1){
+        if(Auth::check() && Auth::user()->id == 1){
             $this->redirectTo = route('admin.dashboard');
         }
-        elseif(Auth::check() && Auth::user()->role->id == 2){
+        else
+        if(Auth::check() && Auth::user()->role->id == 2){
             $this->redirectTo = route('community.dashboard');
         }
-        elseif(Auth::check() && Auth::user()->role->id == 3){
+        else
+        if(Auth::check() && Auth::user()->role->id == 3){
             $this->redirectTo = route('police.dashboard');
         }
+        else{
+            return redirect()->route('login');
+        }
+
+
         $this->middleware('guest')->except('logout');
     }
 }

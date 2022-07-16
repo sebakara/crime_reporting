@@ -57,21 +57,28 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form  method="POST" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate>
+                  <form  method="POST" action="{{ route('login') }}" class="row g-3 needs-validation">
                      @csrf
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="email" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="yourUsername" required>
+                        @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
                     </div>
-
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="yourPassword" required>
+                      @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>

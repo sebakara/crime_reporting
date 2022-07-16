@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
@@ -42,13 +43,19 @@ class RegisterController extends Controller
         if(Auth::check() && Auth::user()->role->id == 1){
             $this->redirectTo = route('admin.dashboard');
         }
-        elseif(Auth::check() && Auth::user()->role->id == 2){
+        else
+        if(Auth::check() && Auth::user()->role->id == 2){
             $this->redirectTo = route('community.dashboard');
         }
-        elseif(Auth::check() && Auth::user()->role->id == 3){
+        else
+        if(Auth::check() && Auth::user()->role->id == 3){
             $this->redirectTo = route('police.dashboard');
         }
-        $this->middleware('guest')->except('logout');
+        else{
+            return redirect()->route('login');
+        }
+        
+        $this->middleware('guest');
     }
 
     /**

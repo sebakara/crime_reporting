@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/login-v2', 'App\Http\Controllers\HomeController@login')->name('loginv2');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //Admin Router
@@ -76,3 +77,7 @@ Route::get('community/change/password/',[App\Http\Controllers\Community\Communit
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
