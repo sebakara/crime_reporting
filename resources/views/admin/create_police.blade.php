@@ -130,8 +130,7 @@
           
             <div class="row mb-3 p-2" style="margin-left: 30px;">
               <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Create Account</button>
-                <button type="submit" class="btn btn-danger float-end">Cancel</button>
+                <button type="" class="btn btn-primary">Create Account</button>
               </div>
             </div>
 

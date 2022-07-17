@@ -9,7 +9,9 @@ use Auth;
 use Image;
 use Hash;
 use MatchOldPassword;
-
+use Illuminate\Support\Str;
+use PDF;
+use App\Models\Report;
 class CommunityController extends Controller
 {
     public function index()
@@ -40,6 +42,45 @@ class CommunityController extends Controller
 
     public function store_report(Request $request){
 
+        $validated = $request->validate([
+            'report_title'     => 'required|max:40',
+            'descriptions'     => 'required',
+            'delivery_to'      => 'required|max:30',
+        ]);
+        
+        $data = array();
+
+        $data['report_title'] = $request->report_title;
+        $data['descriptions'] = $request->descriptions;
+        $data['delivery_to']  = $request->delivery_to;
+        $data['report_status']= "Pending";
+        $data['created_at']   = date('Y-m-d H:i:s');
+        $data['user_id']      = Auth::user()->id;
+    
+        //GETTING REPORT ID
+        $report_id = DB::table('reports')->orderBy('id','desc')->first();
+
+        //Checking if delivery name existed
+
+        if(empty($data['delivery_to'])){
+
+            return redirect()->back()->with("success","Unkown Police Location");
+
+        }else{
+            
+            $report = DB::table('reports')->insert($data);
+            //Save Address
+
+            $address = array();
+            $address['report_id'] = $report_id->id;
+            $address['district']  = $request->district;
+            $address['sector']    = $request->sector;
+            $address['cell']      = $request->cell;
+
+            $address = DB::table('addresses')->insert($address);
+            return redirect()->back()->with("success","Report Successful Submitted");
+
+        }
     }
 
     public function view_report(){
@@ -107,4 +148,18 @@ class CommunityController extends Controller
         return redirect()->back()->with("success","Password successfully changed!");
     }
 
+    public function show_report(){
+        $reports = DB::table('reports')
+                            ->select('reports.*')
+                            ->get();
+        return view('community.show_report',compact('reports'));
+    }
+
+    public function print_report($id){
+        
+        $report = Report::find($id);
+        $pdf = PDF::loadView('community.pdf', compact('report'));
+        return $pdf->download('report.pdf');
+
+    }
 }

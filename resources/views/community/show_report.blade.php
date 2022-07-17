@@ -16,6 +16,7 @@
   <!-- Google Fonts -->
   <link href="../../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+
   <!-- Vendor CSS Files -->
   <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -63,19 +64,19 @@
                     <th scope="col">Delivery To</th>
                     <th scope="col">Status</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                 @foreach($reports as $report)
                   <tr>
                     <td>{{$report->report_title}}</td>
-                    <td>{{\Illuminate\Support\Str::limit($report->descriptions, 70)}}</td>
+                    <td>{{\Illuminate\Support\Str::limit($report->descriptions, 65)}}</td>
                     <td>{{$report->delivery_to}}</td>
-                    <td class="btn btn-primary btn-sm">{{$report->report_status}}</td>
+                    <td class="btn btn-info">{{$report->report_status}}</td>
                     <td>{{$report->created_at}}</td>
                     <td>
-                    <a href="{{URL::to('community/edit/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Edit Report"><i class="fas fas-edit">Edit</i></a>
+                    <a href="{{URL::to('community/print/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Print Report"><i class="fa fa-print"></i>
+</a>
                     </td>
                   </tr>
                   @endforeach

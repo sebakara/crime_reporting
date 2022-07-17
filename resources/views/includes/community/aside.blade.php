@@ -24,7 +24,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{route('community.show.report')}}">
               <i class="bi bi-circle"></i><span>Print Report</span>
             </a>
           </li>

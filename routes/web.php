@@ -77,7 +77,9 @@ Route::get('community/change/password/',[App\Http\Controllers\Community\Communit
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');
 Route::get('community/edit/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'edit_report']);
 Route::post('community/update/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'updateReport']);
-
+Route::post('community/store/report',[App\Http\Controllers\Community\CommunityController::class, 'store_report'])->name('community.store.report');
+Route::get('community/show/report',[App\Http\Controllers\Community\CommunityController::class, 'show_report'])->name('community.show.report');
+Route::get('community/print/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'print_report'])->name('community.print.report');
 
 
 Auth::routes();

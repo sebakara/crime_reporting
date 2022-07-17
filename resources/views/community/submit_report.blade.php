@@ -70,8 +70,18 @@
               </ul>
               <div class="tab-content pt-2">
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="{{route('community.store.report')}}" method="POST">
+                  @csrf
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Report Title</label>
                       <div class="col-md-8 col-lg-9">
@@ -82,7 +92,8 @@
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Description Case</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">
+                      </textarea>
                       </div>
                     </div>
 
@@ -96,16 +107,42 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address </label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (District)</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="district" value="{{$user_address->district}}  District" class="form-control" readonly>
-                        <input name="sector" value="{{$user_address->sector}}  Sector"class="form-control" readonly>
-                        <input name="cell" value="{{$user_address->cell}}  Cell" class="form-control" readonly>
+                        <input name="district" value="{{$user_address->district}}" class="form-control" readonly>
+                       
                       </div>
                     </div>
 
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Sector)</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="sector" value="{{$user_address->sector}}"class="form-control" readonly>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Cell) </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="cell" value="{{$user_address->cell}}" class="form-control" readonly>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+             
+             <div class="col-sm-10">
+             @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{!! \Session::get('success') !!}</li>
+                </ul>
+            </div>
+             @endif
+             </div>
+           </div>
+
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Submit Report</button>
+                      <button class="btn btn-primary">Submit Report</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
