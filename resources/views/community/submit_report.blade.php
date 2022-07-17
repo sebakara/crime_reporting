@@ -89,10 +89,18 @@
                     <div class="row mb-3">
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Delivery To</label>
                       <div class="col-md-8 col-lg-9">
-                        <select name=""  class="form-control">
-                            <option>Name</option>
-                            <option>Jaja</option>
+                        <select name="delivery_to" class="form-control">
+                            <option value="{{$police_address->name}}">{{$police_address->name}}</option>
                          </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address </label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="district" value="{{$user_address->district}}  District" class="form-control" readonly>
+                        <input name="sector" value="{{$user_address->sector}}  Sector"class="form-control" readonly>
+                        <input name="cell" value="{{$user_address->cell}}  Cell" class="form-control" readonly>
                       </div>
                     </div>
 

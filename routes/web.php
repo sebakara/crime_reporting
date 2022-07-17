@@ -75,6 +75,8 @@ Route::get('community/view/report/',[App\Http\Controllers\Community\CommunityCon
 Route::get('community/edit/report/',[App\Http\Controllers\Community\CommunityController::class, 'edit_report'])->name('community.edit.report');
 Route::get('community/change/password/',[App\Http\Controllers\Community\CommunityController::class, 'change_password'])->name('community.change.password');
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');
+Route::get('community/edit/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'edit_report']);
+Route::post('community/update/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'updateReport']);
 
 
 

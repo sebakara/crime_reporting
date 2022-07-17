@@ -68,16 +68,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                @foreach($reports as $report)
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$report->report_title}}</td>
+                    <td>{{$report->descriptions}}</td>
+                    <td>{{$report->delivery_to}}</td>
+                    <td>{{$report->report_status}}</td>
+                    <td>{{$report->created_at}}</td>
                     <td>
-                    <a href="" class="btn btn-primary btn-sm" title="Edit Report"><i class="bi bi-upload"></i></a>
+                    <a href="{{URL::to('community/edit/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Edit Report"><i class="fas fas-edit">Edit</i></a>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

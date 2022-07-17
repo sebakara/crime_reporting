@@ -14,8 +14,7 @@
   <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="../../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -71,24 +70,36 @@
               <div class="tab-content pt-2">
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form action="{{url('community/update/report/' .$report->id)}}" method="POST">
+                  @csrf
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Report Title</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="report_title" type="text" class="form-control" placeholder="Enter Report Title" >
+                        <input name="report_title" value="{{$report->report_title}}" type="text" class="form-control" placeholder="Enter Report Title" >
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Description Case</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">
+                        {{$report->descriptions}}
+                      </textarea>
                       </div>
                     </div>
-
-
+                    <div class="row mb-3">
+             <div class="col-sm-10">
+             @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <ul>
+                    <li>{!! \Session::get('success') !!}</li>
+                </ul>
+            </div>
+             @endif
+             </div>
+           </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Update Report</button>
+                      <button class="btn btn-primary">Update Report</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
