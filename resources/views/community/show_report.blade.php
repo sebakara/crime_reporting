@@ -16,6 +16,10 @@
   <!-- Google Fonts -->
   <link href="../../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
+  <!-- third party css -->
+  <link href="../../../assets/libs/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../../assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+  <!-- third party css end -->
 
   <!-- Vendor CSS Files -->
   <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,13 +32,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../../../assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  
 </head>
 
 <body>
@@ -45,18 +43,37 @@
   @include('includes.community.aside')
 
   <main id="main" class="main">
-
     <div class="pagetitle">
-      <h1>Report Data</h1>
+      <h3 align="center">Crimes Report Range Period</h3>
     </div><!-- End Page Title -->
-
+</br>
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-body">
+            <div class="card-header">
+            <div class="col-lg-6" style="margin-left:320px">
+            <form class="form-inline date-range-form" method="GET">
+            <div class="input-group">
+            <p style="padding-top:20px"><b>From &nbsp; </b></p> 
+            <input style="max-width:25%;" class="form-control" id="dash-daterange" name="date" type="date" />&nbsp;&nbsp;
+            <p style="padding-top:20px"><b>To &nbsp</b></p>
+            <input style="max-width:25%;height:" class="form-control" id="dash-daterange2"  name="to_date" type="date" />&nbsp;&nbsp;
+            <button type="" style="width:30%;" class="btn btn-primary ml-2">Search</button>
+        </div>
+</form>
+</br>
+<h4 class="page-title selected-date text-center" >
+                                                @if (request()->has('date') || request()->has('to_date'))
+                                                    <span style="">
+                                                        {{$fromDate}} &nbsp; @isset($toDate) - &nbsp;  {{$toDate}}@endisset
+                                                    </span>
+                                                @endif
+                                            </h4>
+        </div>
+</br>
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">Report Title</th>
@@ -74,10 +91,6 @@
                     <td>{{$report->delivery_to}}</td>
                     <td class="btn btn-info">{{$report->report_status}}</td>
                     <td>{{$report->created_at}}</td>
-                    <td>
-                    <a href="{{URL::to('community/print/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Print Report"><i class="fa fa-print"></i>
-</a>
-                    </td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -85,28 +98,38 @@
               <!-- End Table with stripped rows -->
             </div>
           </div>
-
         </div>
       </div>
     </section>
-
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>Patrick</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       Designed by <a href="">Patrick</a>
     </div>
   </footer><!-- End Footer -->
-
+ 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script>
+            $('#dash-daterange').flatpickr({
+                altInput: true,
+                altFormat: "F j, Y",
+                dateFormat: "Y-m-d",
+                defaultDate: 'today'
+            });
+            $('#dash-daterange2').flatpickr({
+                altInput: true,
+                altFormat: "F j, Y",
+                dateFormat: "Y-m-d",
+                defaultDate: 'today'
+            });
+            </script>
+
+<script src="../../../assets/libs/flatpickr/flatpickr.min.js"></script>
+<script src="../../../assets/libs/datatables/datatables.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -12,6 +12,7 @@ use MatchOldPassword;
 use Illuminate\Support\Str;
 use PDF;
 use App\Models\Report;
+use Carbon\Carbon;
 class CommunityController extends Controller
 {
     public function index()
@@ -84,7 +85,6 @@ class CommunityController extends Controller
     }
 
     public function view_report(){
-
         $reports = DB::table('reports')
                             ->select('reports.*')
                             ->get();
@@ -148,11 +148,18 @@ class CommunityController extends Controller
         return redirect()->back()->with("success","Password successfully changed!");
     }
 
-    public function show_report(){
+    public function show_report(Request $request){
+
+        $fromDate = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
+        $toDate   = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
+
         $reports = DB::table('reports')
                             ->select('reports.*')
+                            ->whereBetween('reports.created_at', [$fromDate, $toDate])
+                            ->Where('user_id',Auth::user()->id)
                             ->get();
-        return view('community.show_report',compact('reports'));
+        // dd($reports);
+        return view('community.show_report',compact('reports','fromDate','toDate'));
     }
 
     public function print_report($id){
