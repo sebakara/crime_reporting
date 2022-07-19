@@ -127,7 +127,7 @@ class CommunityController extends Controller
 
             }
         }else{
-            return Redirect()->back()->with('success','There is a followup on this report you can not Modify Anymore');
+            return Redirect()->back()->with('success','There is a followup on this report you can not Modify it Anymore');
         }
 
     }

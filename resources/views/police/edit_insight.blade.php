@@ -14,8 +14,7 @@
   <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="../../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,29 +27,22 @@
 
   <!-- Template Main CSS File -->
   <link href="../../../assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.2.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
 
-  @include('includes.community.header')
+  @include('includes.police.header')
 
   <!-- ======= Sidebar ======= -->
-  @include('includes.community.aside')
+  @include('includes.police.aside')
 
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Report Form </h1>
+      <h1>Edit Report Form </h1>
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -64,72 +56,42 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"><font style="margin-left:250px">Click Here To Submit Report</font></button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"><font style="margin-left:250px">Click Here To Make a Comment</font></button>
                 </li>
 
               </ul>
               <div class="tab-content pt-2">
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-              @endif
                   <!-- Profile Edit Form -->
-                  <form action="{{route('community.store.report')}}" method="POST">
+                  <form action="{{url('police/update/insight/' .$data->id)}}" method="POST">
                   @csrf
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Report Title</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="report_title" type="text" class="form-control" placeholder="Enter Report Title" >
+                        <input name="report_title" value="{{$data->report_title}}" type="text" class="form-control" readonly>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Description Case</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">
+                        <textarea name="descriptions"  class="form-control" id="about" style="height: 100px" readonly>
+                        {{$data->descriptions}}
+                      </textarea>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                      <label for="about" class="col-md-4 col-lg-3 col-form-label">Put a Comment</label>
+                      <div class="col-md-8 col-lg-9">
+                        <textarea name="comment_status"  class="form-control" id="about" style="height: 100px">
+                        
                       </textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Delivery To</label>
-                      <div class="col-md-8 col-lg-9">
-                        <select name="delivery_to" class="form-control">
-                            <option value="{{$police_address->username}}">{{$police_address->name}}</option>
-                         </select>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (District)</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="district" value="{{$user_address->district}}" class="form-control" readonly>
-                       
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Sector)</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="sector" value="{{$user_address->sector}}"class="form-control" readonly>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Cell) </label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="cell" value="{{$user_address->cell}}" class="form-control" readonly>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-             
              <div class="col-sm-10">
              @if (\Session::has('success'))
             <div class="alert alert-success">
@@ -140,9 +102,8 @@
              @endif
              </div>
            </div>
-
                     <div class="text-center">
-                      <button class="btn btn-primary">Submit Report</button>
+                      <button class="btn btn-primary">Update Report</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 

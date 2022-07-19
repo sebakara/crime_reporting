@@ -92,7 +92,7 @@
                     <td class="btn btn-info">{{$report->report_status}}</td>
                     <td>{{$report->created_at}}</td>
                   </tr>
-                  @endforeach
+                  @endforeach               
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

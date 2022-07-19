@@ -57,9 +57,13 @@ Route::get('admin/get/cellname/{sector_id}',[App\Http\Controllers\Admin\AdminCon
 Route::group([ 'as' =>'police.','prefix'=>'police','namespace'=>'Police','middleware'=> ['auth','police']],
 function(){
     Route::get('dashboard',[App\Http\Controllers\Police\PoliceController::class, 'index'])->name('dashboard');
-
 }
 );
+
+Route::get('police/view/insight',[App\Http\Controllers\Police\PoliceController::class, 'show_insight'])->name('police.view.insight');
+Route::get('police/edit/insight/{id}',[App\Http\Controllers\Police\PoliceController::class, 'edit_insight'])->name('police.edit.insight');
+Route::post('police/update/insight/{id}',[App\Http\Controllers\Police\PoliceController::class, 'update_insight'])->name('police.update.insight');
+Route::get('police/show/insight',[App\Http\Controllers\Police\PoliceController::class, 'show_report'])->name('police.show.report');
 
 //Community Router
 
