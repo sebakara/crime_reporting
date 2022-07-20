@@ -56,10 +56,10 @@
           <table class="table datatable">
             <thead>
               <tr>
-                <th scope="col">Report Title</th>
+                <th scope="col">Repo Title</th>
                 <th scope="col">Description</th>
-                <th scope="col">CPC Name</th>
-                <th scope="col">CPC Address</th>
+                <th scope="col">Cpc Name</th>
+                <th scope="col">Cpc Address</th>
                 <th scope="col">Comment</th>
                 <th scope="col">Update At</th>
                 <th scope="col">Status</th>

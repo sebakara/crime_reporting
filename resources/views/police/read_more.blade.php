@@ -41,16 +41,16 @@
 
   <!-- ======= Header ======= -->
 
-  @include('includes.community.header')
+  @include('includes.police.header')
 
   <!-- ======= Sidebar ======= -->
-  @include('includes.community.aside')
+  @include('includes.police.aside')
 
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Report Form </h1>
+      <h1 style="margin-left:180px">Crime Reported Descriptions</h1>
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -61,70 +61,38 @@
           <div class="card">
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"><font style="margin-left:250px">Click Here To Submit Report</font></button>
-                </li>
-
-              </ul>
-              <div class="tab-content pt-2">
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-              @endif
                   <!-- Profile Edit Form -->
-                  <form action="{{route('community.store.report')}}" method="POST">
+                  <form action="{{url('police/update/message/' .$user_report->id)}}" method="POST">
                   @csrf
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Report Title</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="report_title" type="text" class="form-control" placeholder="Enter Report Title" >
+                        <input value="{{$user_report->report_title}}" class="form-control" readonly>
                       </div>
                     </div>
+
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Description Case</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px">
+                        <textarea class="form-control" id="about" style="height: 100px" readonly>
+                        {{$user_report->descriptions}}
                       </textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Delivery To</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Date(Submited)</label>
                       <div class="col-md-8 col-lg-9">
-                        <select name="delivery_to" class="form-control">
-                            <option value="{{$police_address->name}}">{{$police_address->name}}</option>
-                         </select>
+                        <input value="{{$user_report->created_at}}" class="form-control" readonly >
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (District)</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address </label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="district" value="{{$user_address->district}}" class="form-control" readonly>
+                        <input value="{{$user_report->address}}" class="form-control" readonly>
                        
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Sector)</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="sector" value="{{$user_address->sector}}"class="form-control" readonly>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Residential Address (Cell) </label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="cell" value="{{$user_address->cell}}" class="form-control" readonly>
                       </div>
                     </div>
 
@@ -142,7 +110,7 @@
            </div>
 
                     <div class="text-center">
-                      <button class="btn btn-primary">Submit Report</button>
+                      <button class="btn btn-primary">Make FollowUp</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 

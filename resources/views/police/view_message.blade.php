@@ -69,13 +69,13 @@
               @foreach($user_report as $report)
               <tr>
                 <td>{{$report->report_title}}</td>
-                <td>{{\Illuminate\Support\Str::limit($report->descriptions, 50)}}</td>
+                <td>{{\Illuminate\Support\Str::limit($report->descriptions, 30)}}</td>
                 <td>{{$report->name}}</td>
                 <td>{{$report->address}}</td>
                 <td>{{$report->created_at}}</td>
                 <td class="btn btn-info">{{$report->report_status}}</td>
                 <td>
-                <a href="{{URL::to('police/edit/insight/'.$report->id)}}" class="btn btn-sm btn-warning" title="Edit" ><i class="fa fa-edit"></i></a>
+                <a href="{{URL::to('police/read/message/'.$report->id)}}" class="btn btn-sm btn-warning" title="Read More" ><i class="fa fa-eye"></i></a>
                 </td>
               </tr>
               @endforeach

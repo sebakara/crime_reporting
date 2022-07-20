@@ -64,6 +64,11 @@ Route::get('police/view/insight',[App\Http\Controllers\Police\PoliceController::
 Route::get('police/edit/insight/{id}',[App\Http\Controllers\Police\PoliceController::class, 'edit_insight'])->name('police.edit.insight');
 Route::post('police/update/insight/{id}',[App\Http\Controllers\Police\PoliceController::class, 'update_insight'])->name('police.update.insight');
 Route::get('police/show/insight',[App\Http\Controllers\Police\PoliceController::class, 'show_report'])->name('police.show.report');
+Route::get('police/view/message',[App\Http\Controllers\Police\PoliceController::class, 'view_message'])->name('police.view.message');
+Route::get('police/read/message/{id}',[App\Http\Controllers\Police\PoliceController::class, 'read_message'])->name('police.read.message');
+Route::post('police/update/message/{id}',[App\Http\Controllers\Police\PoliceController::class, 'update_read_message'])->name('police.update.message');
+Route::get('police/change/password',[App\Http\Controllers\Police\PoliceController::class, 'changePassword'])->name('police.change.password');
+Route::post('police/store/password',[App\Http\Controllers\Police\PoliceController::class, 'store_password'])->name('police.store.password');
 
 //Community Router
 

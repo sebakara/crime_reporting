@@ -18,6 +18,13 @@
               <i class="bi bi-circle"></i><span>Insights</span>
             </a>
           </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="">
+          <i class="bi bi-grid"></i>
+          <span>Report</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
         </ul>
       </li><!-- End Components Nav -->
       <!-- End Forms Nav -->

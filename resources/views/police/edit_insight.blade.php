@@ -54,15 +54,23 @@
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
-
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"><font style="margin-left:250px">Click Here To Make a Comment</font></button>
                 </li>
-
               </ul>
               <div class="tab-content pt-2">
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
+
+                  @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
                   <form action="{{url('police/update/insight/' .$data->id)}}" method="POST">
                   @csrf
                     <div class="row mb-3">
@@ -75,7 +83,7 @@
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Description Case</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="descriptions"  class="form-control" id="about" style="height: 100px" readonly>
+                        <textarea name="descriptions" class="form-control" id="about" style="height: 100px" readonly>
                         {{$data->descriptions}}
                       </textarea>
                       </div>

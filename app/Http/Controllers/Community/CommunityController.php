@@ -22,22 +22,24 @@ class CommunityController extends Controller
 
     public function submit_report(){
         
-        $user_address = DB::table('addresses')
+        $user_address     = DB::table('addresses')
                                 ->select('addresses.*')
                                 ->where('user_id',Auth::user()->id)
                                 ->first();
+
         $district_address = $user_address->district;
         $sector_address   = $user_address->sector;
         $cell_address     = $user_address->cell;
-
 
         $police_address   = DB::table('users')
                                 ->join('addresses','users.id','=','addresses.user_id')
                                 ->select('users.*','addresses.*')
                                 ->where('district',$district_address)
-                                ->where('sector',$sector_address,)
+                                ->where('sector',$sector_address)
                                 ->where('cell',$cell_address)
+                                ->where('role_id',3)
                                 ->first();
+                                //dd($police_address);
         return view('community.submit_report',compact('user_address','police_address'));
     }
 
@@ -57,9 +59,6 @@ class CommunityController extends Controller
         $data['report_status']= "Pending";
         $data['created_at']   = date('Y-m-d H:i:s');
         $data['user_id']      = Auth::user()->id;
-    
-        //GETTING REPORT ID
-        $report_id = DB::table('reports')->orderBy('id','desc')->first();
 
         //Checking if delivery name existed
 
@@ -67,19 +66,36 @@ class CommunityController extends Controller
 
             return redirect()->back()->with("success","Unkown Police Location");
 
-        }else{
+        }
+        else{
             
             $report = DB::table('reports')->insert($data);
-            //Save Address
+             //GETTING REPORT ID
+            $report_id = DB::table('reports')->orderBy('id','desc')->first();
 
-            $address = array();
-            $address['report_id'] = $report_id->id;
-            $address['district']  = $request->district;
-            $address['sector']    = $request->sector;
-            $address['cell']      = $request->cell;
+            if(!empty($report_id->id)){
 
-            $address = DB::table('addresses')->insert($address);
-            return redirect()->back()->with("success","Report Successful Submitted");
+                $address              = array();
+                $address['report_id'] = $report_id->id;
+                $address['district']  = $request->district;
+                $address['sector']    = $request->sector;
+                $address['cell']      = $request->cell;
+    
+                $address = DB::table('addresses')->insert($address);
+                return redirect()->back()->with("success","Report Successful Submitted");
+
+            }else{
+
+                $address = array();
+                $address['report_id'] = 1;
+                $address['district']  = $request->district;
+                $address['sector']    = $request->sector;
+                $address['cell']      = $request->cell;
+    
+                $address = DB::table('addresses')->insert($address);
+                return redirect()->back()->with("success","Report Successful Submitted");
+            }
+           
 
         }
     }
