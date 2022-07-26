@@ -74,7 +74,7 @@
                  <td>{{$community->phone_number}}</td>
                  <td>{{$community->email}}</td>
                  <td>
-                 <img  src="{{asset($community->profile_image)}}" width="50" height="50">
+                 <img  src="../../../assets/img/user_icon.jpg" width="50" height="50">
                 </td>
                  <td>{{$community->district}}</td>
                  <td>{{$community->sector}}</td>

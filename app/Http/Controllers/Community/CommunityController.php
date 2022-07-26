@@ -166,13 +166,15 @@ class CommunityController extends Controller
 
     public function show_report(Request $request){
 
-        $fromDate = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
-        $toDate   = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
-
+        $fromDate      = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
+        $toDate        = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
+        $report_status = $request->report_status;
         $reports = DB::table('reports')
                             ->select('reports.*')
                             ->whereBetween('reports.created_at', [$fromDate, $toDate])
                             ->Where('user_id',Auth::user()->id)
+                            ->where('reports.report_status',$report_status)
+                            //->whereBetween('reports.report_status', ['Resolved','Pending','FollowUp'])
                             ->get();
         // dd($reports);
         return view('community.show_report',compact('reports','fromDate','toDate'));

@@ -1,4 +1,4 @@
-<aside id="sidebar" class="sidebar">
+<aside id="sidebar" class="sidebar print-hidden">
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">

@@ -107,8 +107,8 @@ class AdminController extends Controller
     public function create_community_account(Request $request){
 
         $validated = $request->validate([
-            'username'     => 'required|unique:users|max:10',
-            'name'         => 'required',
+            'username'     => 'required|unique:users|regex:/^[\pL\s\-]+$/u|max:15',
+            'name'         => 'required|regex:/^[\pL\s\-]+$/u|max:20',
             'email'        => 'required|unique:users|max:30',
             'phone_number' => ['required', 'digits:10'],
             'profile_image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -156,21 +156,18 @@ class AdminController extends Controller
                             ->where('id',$request_cell_id)
                             ->first();
 
-
         //Image 
 
         $profile_image = $request->profile_image;
-
 
         if($profile_image){
             
             //Image One
             $image_one_name = hexdec(uniqid()). '.' .$profile_image->getClientOriginalExtension();
-            Image::make($profile_image)->resize(300,300)->save( public_path('media/images/').$image_one_name); //Save local resources
-            $data['profile_image'] = 'public/media/images/' .$image_one_name;
+            Image::make($profile_image)->resize(300,300)->save(public_path('photo/').$image_one_name); //Save local resources
+            $data['profile_image'] = 'public/photo/' .$image_one_name;
 
              //CHECK USER NAME ALREADY EXISTED
-
 
             $user_email  = DB::table('users')
                                 ->SELECT('users.email')
@@ -228,6 +225,7 @@ class AdminController extends Controller
                             ->select('users.*','addresses.*')
                             ->where('role_id','2')
                             ->get();
+                            
         return view('admin.manage_community',compact('communities'));
     }
 
