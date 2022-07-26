@@ -329,13 +329,13 @@
 <body>
 
   <!-- ======= Header ======= -->
-  @include('includes.community.header')
+  @include('includes.admin.header')
   <!-- ======= Sidebar ======= -->
-  @include('includes.community.aside')
+  @include('includes.admin.aside')
 
   <main id="main" class="main sheet">
     <div class="pagetitle">
-      <h3 align="center">Crimes Report Range Period</h3>
+      <h2 align="center">Crimes Report</h2>
     </div><!-- End Page Title -->
 </br>
     <section class="section">
@@ -378,8 +378,11 @@
                     <th scope="col">Report Title</th>
                     <th scope="col">Descriptions</th>
                     <th scope="col">Delivery To</th>
-                    <th scope="col">Comment</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Sector</th>
+                    <th scope="col">Cell</th>
                     <th scope="col">Date</th>
                   </tr>
                 </thead>
@@ -389,9 +392,13 @@
                     <td>{{$report->report_title}}</td>
                     <td>{{\Illuminate\Support\Str::limit($report->descriptions, 65)}}</td>
                     <td>{{$report->delivery_to}}</td>
-                    <td>{{$report->comment_status ?? 'No Comment'}}</td>
                     <td> <span title="{{$report->report_status}}">{{$report->report_status}}</span> </td>
+                    <td>{{$report->comment_status ?? 'No Comment'}}</td>
+                    <td>{{$report->district}}</td>
+                    <td>{{$report->sector}}</td>
+                    <td>{{$report->cell}}</td>
                     <td>{{$report->created_at}}</td>
+                    
                   </tr>
                   @endforeach               
                 </tbody>

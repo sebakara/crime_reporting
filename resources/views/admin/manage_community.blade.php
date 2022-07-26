@@ -60,11 +60,8 @@
                 <th scope="col">Phone</th>
                 <th scope="col">Email</th>
                 <th scope="col">Profile</th>
-                <th scope="col">Distric</th>
-                <th scope="col">Sector</th>
-                <th scope="col">Cell</th>
+                <th scope="col">District</th>
                 <th scope="col">Date</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -77,8 +74,6 @@
                  <img  src="../../../assets/img/user_icon.jpg" width="50" height="50">
                 </td>
                  <td>{{$community->district}}</td>
-                 <td>{{$community->sector}}</td>
-                 <td>{{$community->cell}}</td>
                  <td>{{$community->created_at}}</td>
                   <td>
                       @if($community->user_status==1)

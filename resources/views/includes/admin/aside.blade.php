@@ -43,5 +43,11 @@
           </li>
         </ul>
       </li>
+      <li class="nav-item">
+        <a class="nav-link " href="{{route('admin.show_report')}}">
+          <i class="bi bi-grid"></i>
+          <span>Report</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
       <!-- End Forms Nav -->
     </aside><!-- End Sidebar-->

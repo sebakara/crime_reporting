@@ -329,9 +329,9 @@
 <body>
 
   <!-- ======= Header ======= -->
-  @include('includes.community.header')
+  @include('includes.police.header')
   <!-- ======= Sidebar ======= -->
-  @include('includes.community.aside')
+  @include('includes.police.aside')
 
   <main id="main" class="main sheet">
     <div class="pagetitle">
@@ -388,8 +388,8 @@
                   <tr>
                     <td>{{$report->report_title}}</td>
                     <td>{{\Illuminate\Support\Str::limit($report->descriptions, 65)}}</td>
-                    <td>{{$report->delivery_to}}</td>
                     <td>{{$report->comment_status ?? 'No Comment'}}</td>
+                    <td>{{$report->delivery_to}}</td>
                     <td> <span title="{{$report->report_status}}">{{$report->report_status}}</span> </td>
                     <td>{{$report->created_at}}</td>
                   </tr>

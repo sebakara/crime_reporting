@@ -180,11 +180,5 @@ class CommunityController extends Controller
         return view('community.show_report',compact('reports','fromDate','toDate'));
     }
 
-    public function print_report($id){
-        
-        $report = Report::find($id);
-        $pdf = PDF::loadView('community.pdf', compact('report'));
-        return $pdf->download('report.pdf');
 
-    }
 }

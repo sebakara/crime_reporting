@@ -50,6 +50,7 @@ Route::post('admin/change/password',[App\Http\Controllers\Admin\AdminController:
 
 Route::get('admin/get/sectorname/{district_id}',[App\Http\Controllers\Admin\AdminController::class, 'getSectors']);
 Route::get('admin/get/cellname/{sector_id}',[App\Http\Controllers\Admin\AdminController::class, 'getCells']);
+Route::get('admin/show/report',[App\Http\Controllers\Admin\AdminController::class, 'show_report'])->name('admin.show_report');
 
 
 //Police Router
@@ -69,6 +70,7 @@ Route::get('police/read/message/{id}',[App\Http\Controllers\Police\PoliceControl
 Route::post('police/update/message/{id}',[App\Http\Controllers\Police\PoliceController::class, 'update_read_message'])->name('police.update.message');
 Route::get('police/change/password',[App\Http\Controllers\Police\PoliceController::class, 'changePassword'])->name('police.change.password');
 Route::post('police/store/password',[App\Http\Controllers\Police\PoliceController::class, 'store_password'])->name('police.store.password');
+Route::get('police/show/report',[App\Http\Controllers\Police\PoliceController::class, 'report'])->name('police.show_report');
 
 //Community Router
 

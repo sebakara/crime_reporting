@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
-
+use Carbon\Carbon;
 class PoliceController extends Controller
 {
     public function index()
@@ -146,5 +146,19 @@ class PoliceController extends Controller
         ]);
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
         return redirect()->back()->with("success","Password successfully changed!");
+    }
+
+    public function report(Request $request){
+
+        $fromDate      = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
+        $toDate        = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
+        $report_status = $request->report_status;
+        $reports       = DB::table('reports')
+                            ->select('reports.*')
+                            ->whereBetween('reports.created_at', [$fromDate, $toDate])
+                            ->Where('delivery_to',Auth::user()->name)
+                            ->where('reports.report_status',$report_status)
+                            ->get();
+        return view('police.report',compact('reports','fromDate','toDate'));
     }
 }

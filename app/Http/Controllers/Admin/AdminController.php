@@ -9,6 +9,7 @@ use Auth;
 use Image;
 use Hash;
 use MatchOldPassword;
+use Carbon\Carbon;
 class AdminController extends Controller
 {
     public function index()
@@ -204,7 +205,7 @@ class AdminController extends Controller
                     ->select('users.*','addresses.district')
                     ->where('role_id','3')
                     ->get();
-                    //dd($polices);
+                    // dd($polices);
         return view('admin.manage_police',compact('polices'));
     }
 
@@ -222,10 +223,11 @@ class AdminController extends Controller
 
         $communities = DB::table('users')
                             ->join('addresses','users.id','=','addresses.user_id')
-                            ->select('users.*','addresses.*')
+                            ->select('users.*','addresses.district')
                             ->where('role_id','2')
                             ->get();
-                            
+                            // dd($communities);
+
         return view('admin.manage_community',compact('communities'));
     }
 
@@ -272,6 +274,22 @@ class AdminController extends Controller
                       ->where('sector_id',$sector_id)
                       ->get();
         return json_encode($cellname);
+    }
+
+    public function show_report(Request $request){
+
+        $fromDate      = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
+        $toDate        = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
+        $report_status = $request->report_status;
+        $reports = DB::table('reports')
+                            ->join('addresses','reports.id','addresses.report_id')
+                            ->select('reports.*','addresses.*')
+                            ->whereBetween('reports.created_at', [$fromDate, $toDate])
+                            ->where('reports.report_status',$report_status)
+                            ->get();
+    // dd($reports);
+
+        return view('admin.show_report',compact('reports','fromDate','toDate'));
     }
 
 }
