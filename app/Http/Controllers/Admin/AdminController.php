@@ -292,4 +292,46 @@ class AdminController extends Controller
         return view('admin.show_report',compact('reports','fromDate','toDate'));
     }
 
+    public function show_address_report(Request $request){
+
+        $districts     = DB::table('districts')->get();
+        $sectors       = DB::table('sectors')->get();
+        $cells         = DB::table('cells')->get();
+        
+        $district      = $request->district_id;
+        $sector        = $request->sector_id;
+        $cell          = $request->cell_id;
+
+        $address_report = DB::table('districts')
+                              ->join('sectors','sectors.district_id','districts.id')
+                              ->join('cells','sectors.id','cells.sector_id')
+                              ->select('districts.*','sectors.*','cells.*')
+                              ->where('districts.id',$district)
+                              ->where('sectors.district_id',$district)
+                              ->where('cells.sector_id',$sector)
+                              ->where('cells.id',$cell)
+                              ->first();
+
+                              //dd($address_report);
+
+        $district_to = $address_report->district_name;
+        $sector_to   = $address_report->sector_name;
+        $cell_to     = $address_report->cell_name;
+
+
+        $reports     = DB::table('reports')
+                            ->join('addresses','reports.id','addresses.report_id')
+                            ->select('reports.*','addresses.*')
+                            ->where('addresses.district',$district_to)
+                            ->where('addresses.sector',$sector_to)
+                            ->where('addresses.cell',$cell_to)
+                            ->get();
+
+        
+        //dd($reports);
+
+        return view('admin.show_address_report',compact('reports','districts','sectors','cells'));
+
+    }
+
 }

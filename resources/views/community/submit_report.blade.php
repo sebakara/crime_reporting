@@ -101,7 +101,7 @@
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Delivery To</label>
                       <div class="col-md-8 col-lg-9">
                         <select name="delivery_to" class="form-control">
-                            <option value="{{$police_address->name}}">{{$police_address->name}}</option>
+                            <option value="{{$police_address->name ?? 'Unkown Name'}}">{{$police_address->name ?? 'Unkown Name'}}</option>
                          </select>
                       </div>
                     </div>
@@ -130,7 +130,7 @@
 
                     <div class="row mb-3">
              
-             <div class="col-sm-10">
+             <div class="col-sm-10" style="margin-left:55px">
              @if (\Session::has('success'))
             <div class="alert alert-success">
                 <ul>

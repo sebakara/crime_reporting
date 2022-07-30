@@ -22,14 +22,16 @@ class CommunityController extends Controller
 
     public function submit_report(){
         
+        //User CPC Address
         $user_address     = DB::table('addresses')
                                 ->select('addresses.*')
                                 ->where('user_id',Auth::user()->id)
                                 ->first();
-
         $district_address = $user_address->district;
         $sector_address   = $user_address->sector;
         $cell_address     = $user_address->cell;
+
+        //Police Address
 
         $police_address   = DB::table('users')
                                 ->join('addresses','users.id','=','addresses.user_id')
@@ -39,7 +41,8 @@ class CommunityController extends Controller
                                 ->where('cell',$cell_address)
                                 ->where('role_id',3)
                                 ->first();
-                                //dd($police_address);
+    
+       
         return view('community.submit_report',compact('user_address','police_address'));
     }
 
@@ -62,14 +65,15 @@ class CommunityController extends Controller
 
         //Checking if delivery name existed
 
-        if(empty($data['delivery_to'])){
+        if($data['delivery_to'] == 'Unkown Name'){
 
-            return redirect()->back()->with("success","Unkown Police Location");
+            return redirect()->back()->with("success","This Message Can not be Send Because Unkown Police Name");
 
         }
         else{
             
             $report = DB::table('reports')->insert($data);
+
              //GETTING REPORT ID
             $report_id = DB::table('reports')->orderBy('id','desc')->first();
 

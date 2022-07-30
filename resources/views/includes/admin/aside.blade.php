@@ -46,7 +46,13 @@
       <li class="nav-item">
         <a class="nav-link " href="{{route('admin.show_report')}}">
           <i class="bi bi-grid"></i>
-          <span>Report</span>
+          <span>Search Status Report</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="{{route('admin.address_report')}}">
+          <i class="bi bi-grid"></i>
+          <span>Search Location Report</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <!-- End Forms Nav -->
