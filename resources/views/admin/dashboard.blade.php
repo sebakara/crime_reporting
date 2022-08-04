@@ -202,6 +202,57 @@
 
 </div><!-- End Customers Card -->
 
+<div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Chart Report</h5>
+
+              <!-- Bar Chart -->
+              <canvas id="barChart" style="max-height: 400px;"></canvas>
+              <script>
+
+                var kacyiru_count     = {!! json_encode($kacyiru_count) !!};
+                var Kimihurura_count  = {!! json_encode($Kimihurura_count) !!};
+                var Kimironko_count   = {!! json_encode($Kimironko_count) !!};
+
+                document.addEventListener("DOMContentLoaded", () => {
+                  new Chart(document.querySelector('#barChart'), {
+                    type: 'bar',
+                    data: {
+                      labels: ['Kacyiru', 'Kimihurura', 'Kimironko'],
+                      datasets: [{
+                        label: 'Report Case',
+                        data: [kacyiru_count, Kimihurura_count, Kimironko_count],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)'
+
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)'
+                        ],
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                });
+              </script>
+              <!-- End Bar CHart -->
+
+            </div>
+          </div>
+        </div>
+
             <!-- Recent Sales -->
         
             <!-- Top Selling -->

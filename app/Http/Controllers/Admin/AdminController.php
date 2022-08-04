@@ -14,8 +14,27 @@ class AdminController extends Controller
 {
     public function index()
     {
+        $kacyiru       = DB::table('reports')
+                                ->join('addresses','addresses.report_id','reports.id')
+                                ->where('addresses.sector','Kacyiru')
+                                ->get();
+
+        $Kimihurura    = DB::table('reports')
+                                ->join('addresses','addresses.report_id','reports.id')
+                                ->where('addresses.sector','Kimihurura')
+                                ->get();
+
         
-        return view('admin.dashboard');
+        $Kimironko     = DB::table('reports')
+                                ->join('addresses','addresses.report_id','reports.id')
+                                ->where('addresses.sector','Kimironko')
+                                ->get();
+        
+        $kacyiru_count    = $kacyiru->count();
+        $Kimihurura_count = $Kimihurura->count();
+        $Kimironko_count  = $Kimironko->count();
+
+        return view('admin.dashboard', compact('kacyiru_count','Kimihurura_count','Kimironko_count'));
     }
 
     public function police_account(){
