@@ -331,23 +331,27 @@ class AdminController extends Controller
                               ->where('cells.id',$cell)
                               ->first();
 
-                              //dd($address_report);
-
-        $district_to = $address_report->district_name;
-        $sector_to   = $address_report->sector_name;
-        $cell_to     = $address_report->cell_name;
-
-
-        $reports     = DB::table('reports')
-                            ->join('addresses','reports.id','addresses.report_id')
-                            ->select('reports.*','addresses.*')
-                            ->where('addresses.district',$district_to)
-                            ->where('addresses.sector',$sector_to)
-                            ->where('addresses.cell',$cell_to)
-                            ->get();
-
         
-        //dd($reports);
+        if(!empty($address_report)){
+
+            $district_to = $address_report->district_name;
+            $sector_to   = $address_report->sector_name;
+            $cell_to     = $address_report->cell_name;
+    
+    
+            $reports     = DB::table('reports')
+                                ->join('addresses','reports.id','addresses.report_id')
+                                ->select('reports.*','addresses.*')
+                                ->where('addresses.district',$district_to)
+                                ->where('addresses.sector',$sector_to)
+                                ->where('addresses.cell',$cell_to)
+                                ->get();
+
+        }else{
+
+            return redirect()->back()->with("success","The address is not found!");
+
+        }
 
         return view('admin.show_address_report',compact('reports','districts','sectors','cells'));
 
