@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2022 at 04:07 PM
--- Server version: 8.0.29-0ubuntu0.22.04.2
+-- Generation Time: Aug 12, 2022 at 09:19 AM
+-- Server version: 8.0.30-0ubuntu0.22.04.1
 -- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -41,14 +41,13 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id`, `user_id`, `report_id`, `district`, `sector`, `cell`) VALUES
-(1, 2, NULL, 'Gasabo', 'Kimihurura', 'Kamukina'),
-(2, 3, NULL, 'Gasabo', 'Kimihurura', 'Kamukina'),
-(3, 4, NULL, 'Gasabo', 'Kimihurura', 'Kamukina'),
-(4, NULL, 1, 'Gasabo', 'Kimihurura', 'Kamukina'),
-(7, NULL, 4, 'Gasabo', 'Kimihurura', 'Kamukina'),
-(8, 5, NULL, 'Nyarugenge', 'Nyamirambo', 'Cyivugiza '),
-(9, 6, NULL, 'Nyarugenge', 'Nyamirambo', 'Cyivugiza '),
-(10, 7, NULL, 'Gasabo', 'Kimironko', 'Bibare');
+(11, 8, NULL, 'Gasabo', 'Kacyiru', 'Kibaza'),
+(12, 9, NULL, 'Gasabo', 'Kacyiru', 'Kibaza'),
+(15, NULL, 7, 'Gasabo', 'Kacyiru', 'Kibaza'),
+(16, NULL, 8, 'Gasabo', 'Kacyiru', 'Kibaza'),
+(17, NULL, 9, 'Gasabo', 'Kimihurura', 'Kibaza'),
+(18, NULL, 10, 'Gasabo', 'Kimihurura', 'Kibaza'),
+(19, NULL, 11, 'Gasabo', 'Kacyiru', 'Kibaza');
 
 -- --------------------------------------------------------
 
@@ -75,52 +74,7 @@ INSERT INTO `cells` (`id`, `sector_id`, `cell_name`) VALUES
 (6, 2, 'Rugando'),
 (7, 3, 'Bibare'),
 (8, 3, 'Kibagabaga'),
-(9, 3, 'Nyagatovu'),
-(10, 4, 'Kamuhoza'),
-(11, 4, 'Katabaro'),
-(12, 4, 'Kimisagara'),
-(13, 5, 'Amahoro'),
-(14, 5, 'Kabeza'),
-(15, 5, 'Nyabugogo'),
-(16, 6, 'Cyivugiza '),
-(17, 6, 'Gasharu'),
-(18, 6, 'Mumena'),
-(19, 7, 'Gatenga'),
-(20, 7, 'Karambo'),
-(21, 7, 'Nyanza'),
-(22, 8, 'Kanserege'),
-(23, 8, 'Muyange'),
-(24, 8, 'Rukatsa'),
-(25, 9, 'Busanza'),
-(26, 9, 'Kabeza'),
-(27, 9, 'Karama'),
-(28, 1, 'Kamatamu'),
-(29, 1, 'Kamutwa'),
-(30, 1, 'Kibaza'),
-(31, 2, 'Kamukina'),
-(32, 2, 'Kimihurura'),
-(33, 2, 'Rugando'),
-(34, 3, 'Bibare'),
-(35, 3, 'Kibagabaga'),
-(36, 3, 'Nyagatovu'),
-(37, 4, 'Kamuhoza'),
-(38, 4, 'Katabaro'),
-(39, 4, 'Kimisagara'),
-(40, 5, 'Amahoro'),
-(41, 5, 'Kabeza'),
-(42, 5, 'Nyabugogo'),
-(43, 6, 'Cyivugiza '),
-(44, 6, 'Gasharu'),
-(45, 6, 'Mumena'),
-(46, 7, 'Gatenga'),
-(47, 7, 'Karambo'),
-(48, 7, 'Nyanza'),
-(49, 8, 'Kanserege'),
-(50, 8, 'Muyange'),
-(51, 8, 'Rukatsa'),
-(52, 9, 'Busanza'),
-(53, 9, 'Kabeza'),
-(54, 9, 'Karama');
+(9, 3, 'Nyagatovu');
 
 -- --------------------------------------------------------
 
@@ -138,12 +92,7 @@ CREATE TABLE `districts` (
 --
 
 INSERT INTO `districts` (`id`, `district_name`) VALUES
-(1, 'Gasabo'),
-(2, 'Nyarugenge'),
-(3, 'Kicukiro'),
-(4, 'Gasabo'),
-(5, 'Nyarugenge'),
-(6, 'Kicukiro');
+(1, 'Gasabo');
 
 -- --------------------------------------------------------
 
@@ -242,8 +191,11 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `user_id`, `report_title`, `descriptions`, `delivery_to`, `report_status`, `comment_status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Crime Report 1', 'Crime Report 1', 'police', 'Resolved', 'Yes I saw him killing me.', '2022-07-20 18:19:20', '2022-07-20 19:41:17'),
-(4, 2, 'Location Dead', 'Location Dead5', 'police', 'Resolved', 'el esperanza', '2022-07-20 18:27:45', '2022-07-26 18:34:54');
+(7, 9, 'Crime Report 1', 'Crime Report 1', 'shyakagen', 'FollowUp', NULL, '2022-07-30 18:23:10', NULL),
+(8, 9, 'Crime Report 1', 'Crime Report 1', 'shyakagen', 'Pending', NULL, '2022-07-30 18:23:10', NULL),
+(9, 9, 'Crime Report 1', 'Crime Report 1', 'shyakagen', 'Pending', NULL, '2022-07-30 18:23:10', NULL),
+(10, 9, 'Crime Report 1', 'Crime Report 1', 'shyakagen', 'Pending', NULL, '2022-07-30 18:23:10', NULL),
+(11, 11, 'Crime Report 1', 'Crime Report 1', 'shyakagen', 'Pending', NULL, '2022-07-30 18:23:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -287,22 +239,7 @@ CREATE TABLE `sectors` (
 INSERT INTO `sectors` (`id`, `district_id`, `sector_name`) VALUES
 (1, 1, 'Kacyiru'),
 (2, 1, 'Kimihurura'),
-(3, 1, 'Kimironko'),
-(4, 2, 'Kimisagara'),
-(5, 2, 'Muhima'),
-(6, 2, 'Nyamirambo'),
-(7, 3, 'Gatenga'),
-(8, 3, 'Kagarama'),
-(9, 3, 'Kanombe'),
-(10, 1, 'Kacyiru'),
-(11, 1, 'Kimihurura'),
-(12, 1, 'Kimironko'),
-(13, 2, 'Kimisagara'),
-(14, 2, 'Muhima'),
-(15, 2, 'Nyamirambo'),
-(16, 3, 'Gatenga'),
-(17, 3, 'Kagarama'),
-(18, 3, 'Kanombe');
+(3, 1, 'Kimironko');
 
 -- --------------------------------------------------------
 
@@ -332,11 +269,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `username`, `phone_number`, `profile_image`, `user_status`, `password`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 1, 'admin', 'admin@gmail.com', 'admin', NULL, NULL, '1', '$2y$10$Ov9sLuvumsYH4a.54Nz6zexNvc37xMojdqBxV1gKOpjZP3u8Q/7Im', NULL, NULL, NULL, NULL),
-(2, 2, 'shyaka', 'community@gmail.com', 'shyaka', '0785730731', 'public/media/images/1738904178143937.png', '0', '$2y$10$fcwxnjgl5lfMnkQmJEUYgeNDvXKicyPSmPkA8jQRz5USc9pe1ZIqS', NULL, NULL, '2022-07-19 22:00:00', NULL),
-(3, 2, 'shema', 'shemacommunity@gmail.com', 'shema', '0785730731', 'public/media/images/1738904236534500.png', '1', '$2y$10$91I1av8EBakxpoU4rtaXzefiL41XH9MyQBPaA3IuIEVQw3JAJFGj.', NULL, NULL, '2022-07-19 22:00:00', NULL),
-(4, 3, 'police', 'police@gmail.com', 'police', NULL, NULL, '1', '$2y$10$Evqr1IFIs4UaB4CPQvaCWeG3R3kISu9tm9WNMD72fEK0bOv0KeGnu', NULL, NULL, '2022-07-19 22:00:00', NULL),
-(5, 3, 'gogo', 'gogo@gmail.com', 'gogo', NULL, NULL, '0', '$2y$10$e/2CzzzGlMdexZ8nkmfAt.3NegVAdfWz5p9qNIA2svKQdyv9mWCXu', NULL, NULL, '2022-07-25 22:00:00', NULL),
-(7, 2, 'rerwerw', 'dsafds@gmail.com', 'sdfdsfds', '0785730732', 'public/photo/1739410963472261.png', '0', '$2y$10$Rjv1WafquBhEUGp8LmKgxeUQW4Z9MvrAxJqcTuLDWpfLw0xZt7XFO', NULL, NULL, '2022-07-25 22:00:00', NULL);
+(8, 3, 'shyakagen', 'police@gmail.com', 'shyakagen', NULL, NULL, '1', '$2y$10$F3w6tdjmKuhRugCyqqnmYuCOyj.SBzTvmkZPY3yBJSErfDtTdlqpa', NULL, NULL, '2022-07-29 22:00:00', NULL),
+(9, 2, 'test', 'testadmin@gmail.com', 'test', '0785730731', 'public/photo/1739789234197268.png', '1', '$2y$10$PNXXTg3joI5hAS2qXGpQHO5cGq2f9VR23P0j2Msi4fd1dI8Tfe3fe', NULL, NULL, '2022-07-29 22:00:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -421,7 +355,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `cells`
@@ -457,7 +391,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -475,7 +409,7 @@ ALTER TABLE `sectors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
