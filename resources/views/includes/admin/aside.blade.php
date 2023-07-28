@@ -23,6 +23,14 @@
               <i class="bi bi-circle"></i><span>CPC</span>
             </a>
           </li>
+
+          <li>
+            <a href="{{route('admin.account.sector_officer')}}">
+              <i class="bi bi-circle"></i><span>Sector officer</span>
+            </a>
+          </li>
+
+
         </ul>
       </li><!-- End Components Nav -->
 

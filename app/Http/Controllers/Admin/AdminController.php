@@ -8,7 +8,7 @@ use DB;
 use Auth;
 use Image;
 use Hash;
-use MatchOldPassword;
+use App\Rules\MatchOldPassword;
 use Carbon\Carbon;
 class AdminController extends Controller
 {
@@ -46,43 +46,94 @@ class AdminController extends Controller
         return view('admin.create_police',compact('districts','sectors','cells'));
     }
 
-    public function create_police_account(Request $request){
 
+    public function sector_account(){
 
+        $districts = DB::table('districts')->get();
+        $sectors   = DB::table('sectors')->get();
+        $cells     = DB::table('cells')->get();
+
+        return view('admin.create_sector_officer',compact('districts','sectors','cells'));
+    }
+
+    // create sector officer
+    public function create_sector_officer_account(Request $request){
         $validated = $request->validate([
             'username' => 'required|unique:users|max:10',
             'name' => 'required',
             'email' => 'required|unique:users|max:30',
-           
         ]);
-
         //SELECT ROLE
-
         $role = DB::table('roles')
                      ->SELECT('roles.*')
-                     ->WHERE('name','Police')
+                     ->WHERE('name','Sector_officer')
                      ->first();
 
-        
-        //Getting Address IDS
-       
+                             //Getting Address IDS
         $request_district_id  = $request->district_id;
         $request_sector_id    = $request->sector_id;
         $request_cell_id      = $request->cell_id;
-        
-
          //Getting District Name, Sector Name , Cell Name
          $get_district = DB::table('districts')
                                 ->select('districts.*')
                                 ->where('id',$request_district_id)
                                 ->first();
-
          $get_sector   = DB::table('sectors')
                                 ->select('sectors.*')
                                 ->where('id',$request_sector_id)
                                 ->first();
+        $get_cell      = DB::table('cells')
+                                ->select('cells.*')
+                                ->where('id',$request_cell_id)
+                                ->first();
+        //Save Data
+        $data =  array();
+        $data['username']    = $request->username;
+        $data['name']        = $request->name;
+        $data['email']       = $request->email;
+        $data['role_id']     = $role->id;
+        $data['password']    = bcrypt($data['username']);
+        $data['user_status'] = 1;
+        $data['created_at']  = date('Y-m-d');
 
-
+        $sector_officer = DB::table('users')->insert($data);
+        if($sector_officer ){
+            //GETTING USER ID 
+            $user_id = DB::table('users')->orderBy('id','desc')->first();
+            //Save Address
+            $address              = array();
+            $address['user_id']   = $user_id->id;
+            $address['district']  = $get_district->district_name;
+            $address['sector']    = $get_sector->sector_name;
+            $address['cell']      = $get_cell->cell_name;
+            $address= DB::table('addresses')->insert($address);
+            return redirect()->back()->with('success', 'Account Successful Create'); 
+        }
+    }
+    public function create_police_account(Request $request){
+        $validated = $request->validate([
+            'username' => 'required|unique:users|max:10',
+            'name' => 'required',
+            'email' => 'required|unique:users|max:30',
+        ]);
+        //SELECT ROLE
+        $role = DB::table('roles')
+                     ->SELECT('roles.*')
+                     ->WHERE('name','Police')
+                     ->first();
+        //Getting Address IDS
+        $request_district_id  = $request->district_id;
+        $request_sector_id    = $request->sector_id;
+        $request_cell_id      = $request->cell_id;
+         //Getting District Name, Sector Name , Cell Name
+         $get_district = DB::table('districts')
+                                ->select('districts.*')
+                                ->where('id',$request_district_id)
+                                ->first();
+         $get_sector   = DB::table('sectors')
+                                ->select('sectors.*')
+                                ->where('id',$request_sector_id)
+                                ->first();
         $get_cell      = DB::table('cells')
                                 ->select('cells.*')
                                 ->where('id',$request_cell_id)
@@ -99,10 +150,8 @@ class AdminController extends Controller
 
         $polices = DB::table('users')->insert($data);
         if($polices){
-
             //GETTING USER ID 
             $user_id = DB::table('users')->orderBy('id','desc')->first();
-
             //Save Address
             $address              = array();
             $address['user_id']   = $user_id->id;

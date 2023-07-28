@@ -32,6 +32,8 @@ function(){
 );
 
 Route::get('admin/create/police/account',[App\Http\Controllers\Admin\AdminController::class, 'police_account'])->name('admin.account.police');
+// sector_account
+Route::get('admin/create/sector_officer/account',[App\Http\Controllers\Admin\AdminController::class, 'sector_account'])->name('admin.account.sector_officer');
 Route::get('admin/create/community/account',[App\Http\Controllers\Admin\AdminController::class, 'community_account'])->name('admin.account.community');
 Route::get('admin/manage/police',[App\Http\Controllers\Admin\AdminController::class, 'manage_police'])->name('admin.manage.police');
 Route::get('admin/manage/community',[App\Http\Controllers\Admin\AdminController::class, 'manage_community'])->name('admin.manage.community');
@@ -71,7 +73,14 @@ Route::post('police/update/message/{id}',[App\Http\Controllers\Police\PoliceCont
 Route::get('police/change/password',[App\Http\Controllers\Police\PoliceController::class, 'changePassword'])->name('police.change.password');
 Route::post('police/store/password',[App\Http\Controllers\Police\PoliceController::class, 'store_password'])->name('police.store.password');
 Route::get('police/show/report',[App\Http\Controllers\Police\PoliceController::class, 'report'])->name('police.show_report');
+// sector.dashboard
+// sector route
+Route::group([ 'as' =>'sector.','prefix'=>'sector','namespace'=>'sector','middleware'=> ['auth']],
+function(){
+    Route::get('dashboard',[App\Http\Controllers\Community\CommunityController::class, 'index'])->name('dashboard');
 
+}
+);
 //Community Router
 
 Route::group([ 'as' =>'community.','prefix'=>'community','namespace'=>'Community','middleware'=> ['auth','community']],

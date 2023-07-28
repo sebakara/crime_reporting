@@ -31,10 +31,15 @@ class HomeController extends Controller
         $result = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
         if($result){
             $user = Auth::user();
+
+            // var_dump($user->role_id);
+            // exit();
             if($user->role_id == 1)
                 return redirect(route('admin.dashboard'));
             elseif($user->role_id == 2)
                 return redirect(route('community.dashboard'));
+            elseif($user->role_id == 3)
+                return redirect(route('sector.dashboard'));
             else
                 return redirect(route('police.dashboard'));
         }else{

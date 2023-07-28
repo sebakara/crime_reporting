@@ -140,8 +140,6 @@ class CommunityController extends Controller
             $data['updated_at']       =  date('Y-m-d H:i:s');
 
             $update = DB::table('reports')->where('id',$id)->update($data);
-            
-          
             if($update){
                 return Redirect()->route('community.view.report')->with('success','Report Successful Updated');
 
@@ -149,7 +147,6 @@ class CommunityController extends Controller
         }else{
             return Redirect()->back()->with('success','There is a followup on this report you can not Modify it Anymore');
         }
-
     }
 
     public function change_password(){
