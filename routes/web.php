@@ -37,6 +37,9 @@ Route::get('admin/create/sector_officer/account',[App\Http\Controllers\Admin\Adm
 Route::get('admin/create/community/account',[App\Http\Controllers\Admin\AdminController::class, 'community_account'])->name('admin.account.community');
 Route::get('admin/manage/police',[App\Http\Controllers\Admin\AdminController::class, 'manage_police'])->name('admin.manage.police');
 Route::get('admin/manage/community',[App\Http\Controllers\Admin\AdminController::class, 'manage_community'])->name('admin.manage.community');
+
+Route::get('admin/manage/sector_officer',[App\Http\Controllers\Admin\AdminController::class, 'manage_sector'])->name('admin.manage.sector_officer');
+
 Route::post('admin/store/police/account/details',[App\Http\Controllers\Admin\AdminController::class, 'create_police_account'])->name('admin.store.police');
 Route::post('admin/store/community/account/details',[App\Http\Controllers\Admin\AdminController::class, 'create_community_account'])->name('admin.store.community');
 
@@ -96,6 +99,9 @@ Route::get('community/edit/report/',[App\Http\Controllers\Community\CommunityCon
 Route::get('community/change/password/',[App\Http\Controllers\Community\CommunityController::class, 'change_password'])->name('community.change.password');
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');
 Route::get('community/edit/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'edit_report']);
+
+Route::get('community/approve/report/{id}',[App\Http\Controllers\Community\CommunityController::class,'approve_report'])->name('community.approve');
+
 Route::post('community/update/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'updateReport']);
 Route::post('community/store/report',[App\Http\Controllers\Community\CommunityController::class, 'store_report'])->name('community.store.report');
 Route::get('community/show/report',[App\Http\Controllers\Community\CommunityController::class, 'show_report'])->name('community.show.report');

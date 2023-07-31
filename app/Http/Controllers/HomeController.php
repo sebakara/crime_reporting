@@ -38,7 +38,7 @@ class HomeController extends Controller
                 return redirect(route('admin.dashboard'));
             elseif($user->role_id == 2)
                 return redirect(route('community.dashboard'));
-            elseif($user->role_id == 3)
+            elseif($user->role_id == 4)
                 return redirect(route('sector.dashboard'));
             else
                 return redirect(route('police.dashboard'));
