@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Community;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Image;
 use Hash;
@@ -60,6 +60,7 @@ class CommunityController extends Controller
         $data['descriptions'] = $request->descriptions;
         $data['delivery_to']  = $request->delivery_to;
         $data['report_status']= "Pending";
+        $data['status']= "0";
         $data['created_at']   = date('Y-m-d H:i:s');
         $data['user_id']      = Auth::user()->id;
 
@@ -119,6 +120,20 @@ class CommunityController extends Controller
                             ->where('id',$id)
                             ->first();
         return view('community.edit_report',compact('report'));
+    }
+
+    public function approve_report($id){
+        DB::table('reports')
+            ->where('id', $id)
+            ->update([
+                'status' => 1,
+                'report_status' => 'FollowUp',
+            ]);
+        // $report = DB::table('reports')->find($id);
+        // $report->status = 1;
+        // $report->report_status = 'approved';
+        // $report->save();
+        return redirect()->back()->with('success', 'The report is now approved');
     }
 
     public function updateReport(Request $request, $id){
