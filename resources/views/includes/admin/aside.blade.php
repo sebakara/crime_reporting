@@ -49,6 +49,11 @@
               <i class="bi bi-circle"></i><span>CPC</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('admin.manage.sector_officer')}}">
+              <i class="bi bi-circle"></i><span>Sector officer</span>
+            </a>
+          </li>
         </ul>
       </li>
       <li class="nav-item">

@@ -47,6 +47,11 @@
 
     <div class="pagetitle">
       <h1>Report Data</h1>
+      @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+@endif
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -63,7 +68,7 @@
                     <th scope="col">Delivery To</th>
                     <th scope="col">Status</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,9 +79,24 @@
                     <td>{{$report->delivery_to}}</td>
                     <td class="btn btn-primary btn-sm">{{$report->report_status}}</td>
                     <td>{{$report->created_at}}</td>
+                    @if(Auth::user()->role_id == 4 && $report->status != 1)
                     <td>
                     <a href="{{URL::to('community/edit/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Edit Report"><i class="fas fas-edit">Edit</i></a>
                     </td>
+                    <td>
+                      <a href="{{URL::to('community/approve/report/'.$report->id)}}" class="btn btn-primary btn-sm">Approve</a>
+                    </td>
+                    @elseif(Auth::user()->role_id == 4 && $report->status == 1)
+                    <td>
+                    <a href="{{URL::to('community/edit/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Edit Report"><i class="fas fas-edit">Edit</i></a>
+                    </td>
+                    <td class="btn btn-link">Approved</td>
+                    @elseif(Auth::user()->role_id == 3 && $report->status == 1)
+                    <td>
+                    <a href="{{URL::to('community/edit/report/'.$report->id)}}" class="btn btn-primary btn-sm" title="Edit Report"><i class="fas fas-edit">Edit</i></a>
+                    </td>
+                    <td class="btn btn-link">Approved</td>
+                    @endif
                   </tr>
                   @endforeach
                 </tbody>

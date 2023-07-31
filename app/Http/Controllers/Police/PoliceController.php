@@ -159,6 +159,7 @@ class PoliceController extends Controller
                             ->Where('delivery_to',Auth::user()->name)
                             ->where('reports.report_status',$report_status)
                             ->get();
+
         return view('police.report',compact('reports','fromDate','toDate'));
     }
 }

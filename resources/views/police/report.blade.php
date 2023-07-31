@@ -10,28 +10,28 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../../../assets/img/favicon.png" rel="icon">
-  <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset('img/favicon.png')}}" rel="icon">
+  <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="../../../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
   <!-- third party css -->
-  <link href="../../../assets/libs/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-  <link href="../../../assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+  <link href="{{asset('libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{asset('libs/flatpickr/flatpickr.min.css')}}" rel="stylesheet" type="text/css" />
   <!-- third party css end -->
 
   <!-- Vendor CSS Files -->
-  <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="../../../assets/css/style.css" rel="stylesheet">
+  <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
   <style type="text/css">
     @media print {
@@ -422,21 +422,21 @@
         });
      </script>
 
-<script src="../../../assets/libs/flatpickr/flatpickr.min.js"></script>
-<script src="../../../assets/libs/datatables/datatables.min.js"></script>
+<script src="{{asset('libs/flatpickr/flatpickr.min.js')}}"></script>
+<script src="{{asset('libs/datatables/datatables.min.js')}}"></script>
 
   <!-- Vendor JS Files -->
-  <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../../assets/vendor/chart.js/chart.min.js"></script>
-  <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
-  <script src="../../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="{{asset('vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('vendor/chart.js/chart.min.js')}}"></script>
+  <script src="{{asset('vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{asset('vendor/quill/quill.min.js')}}"></script>
+  <script src="{{asset('vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{asset('vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
 
   <!-- Template Main JS File -->
-  <script src="../../../assets/js/main.js"></script>
+  <script src="{{asset('js/main.js')}}"></script>
 
 </body>
 

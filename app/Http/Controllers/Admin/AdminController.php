@@ -299,6 +299,21 @@ class AdminController extends Controller
         return view('admin.manage_community',compact('communities'));
     }
 
+
+    // manage_sector
+
+    public function manage_sector(){
+
+        $sector_officers = DB::table('users')
+                            ->join('addresses','users.id','=','addresses.user_id')
+                            ->select('users.*','addresses.district')
+                            ->where('role_id','3')
+                            ->get();
+                            // dd($communities);
+
+        return view('admin.manage_sector_officers',compact('sector_officers'));
+    }
+
     public function changePassword(){
         
         return view('admin.profile');
