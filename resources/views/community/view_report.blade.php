@@ -68,7 +68,9 @@
                     <th scope="col">Delivery To</th>
                     <th scope="col">Status</th>
                     <th scope="col">Date</th>
+                    @if((Auth::user()->role_id == 4 )||(Auth::user()->role_id == 4 )||(Auth::user()->role_id == 3))
                     <th scope="col" colspan="2">Action</th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -77,7 +79,7 @@
                     <td>{{$report->report_title}}</td>
                     <td>{{\Illuminate\Support\Str::limit($report->descriptions, 70)}}</td>
                     <td>{{$report->delivery_to}}</td>
-                    <td class="btn btn-primary btn-sm">{{$report->report_status}}</td>
+                    <td class="btn btn-info btn-sm">{{$report->report_status}}</td>
                     <td>{{$report->created_at}}</td>
                     @if(Auth::user()->role_id == 4 && $report->status != 1)
                     <td>

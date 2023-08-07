@@ -95,6 +95,7 @@ function(){
 
 Route::get('community/submit/report/',[App\Http\Controllers\Community\CommunityController::class, 'submit_report'])->name('community.submit.report');
 Route::get('community/view/report/',[App\Http\Controllers\Community\CommunityController::class, 'view_report'])->name('community.view.report');
+Route::get('sector/view/report/',[App\Http\Controllers\Community\CommunityController::class, 'sector_view_report'])->name('sector.view.report');
 Route::get('community/edit/report/',[App\Http\Controllers\Community\CommunityController::class, 'edit_report'])->name('community.edit.report');
 Route::get('community/change/password/',[App\Http\Controllers\Community\CommunityController::class, 'change_password'])->name('community.change.password');
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');

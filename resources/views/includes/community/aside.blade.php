@@ -19,9 +19,16 @@
             </a>
           </li>
           <li>
+            @if(Auth::user()->role_id == 4)
+            <a href="{{route('sector.view.report')}}">
+              <i class="bi bi-circle"></i><span>View More</span>
+            </a>
+            @elseif(Auth::user()->role_id == 2)
+
             <a href="{{route('community.view.report')}}">
               <i class="bi bi-circle"></i><span>View More</span>
             </a>
+            @endif
           </li>
           <li>
             <a href="{{route('community.show.report')}}">

@@ -36,13 +36,13 @@ class CommunityController extends Controller
         $police_address   = DB::table('users')
                                 ->join('addresses','users.id','=','addresses.user_id')
                                 ->select('users.*','addresses.*')
-                                ->where('district',$district_address)
-                                ->where('sector',$sector_address)
-                                ->where('cell',$cell_address)
-                                ->where('role_id',3)
+                                ->where('addresses.district',$district_address)
+                                ->where('addresses.sector',$sector_address)
+                                ->where('users.role_id',3)
                                 ->first();
     
        
+                                // ->where('addresses.cell',$cell_address)
         return view('community.submit_report',compact('user_address','police_address'));
     }
 
@@ -108,6 +108,17 @@ class CommunityController extends Controller
     public function view_report(){
         $reports = DB::table('reports')
                             ->select('reports.*')
+                            ->where('user_id',Auth::user()->id)
+                            ->orderBy('id','desc')
+                            ->get();
+                           
+        return view('community.view_report',compact('reports'));
+    }
+
+    public function sector_view_report(){
+        $reports = DB::table('reports')
+                            ->select('reports.*')
+                            ->orderBy('id','desc')
                             ->get();
                            
         return view('community.view_report',compact('reports'));
