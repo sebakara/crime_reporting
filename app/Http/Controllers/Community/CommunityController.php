@@ -20,6 +20,10 @@ class CommunityController extends Controller
         return view('community.dashboard');
     }
 
+    public function index_sector()
+    {
+        return view('sector.dashboard');
+    }
     public function submit_report(){
         
         //User CPC Address
@@ -60,6 +64,7 @@ class CommunityController extends Controller
         $data['descriptions'] = $request->descriptions;
         $data['delivery_to']  = $request->delivery_to;
         $data['report_status']= "Pending";
+        $data['sector']= $request->sector;
         $data['status']= "0";
         $data['created_at']   = date('Y-m-d H:i:s');
         $data['user_id']      = Auth::user()->id;
@@ -118,10 +123,11 @@ class CommunityController extends Controller
     public function sector_view_report(){
         $reports = DB::table('reports')
                             ->select('reports.*')
+                            ->Where('sector',Auth::user()->sector)
                             ->orderBy('id','desc')
                             ->get();
                            
-        return view('community.view_report',compact('reports'));
+        return view('sector.view_report',compact('reports'));
     }
 
     public function edit_report($id){
@@ -205,6 +211,22 @@ class CommunityController extends Controller
                             ->get();
         // dd($reports);
         return view('community.show_report',compact('reports','fromDate','toDate'));
+    }
+
+    public function sector_show_report(Request $request){
+
+        $fromDate      = $request->has('date')?$request->get('date').' 09:59:00':Carbon::yesterday()->format('Y-m-d').' 09:59:00';
+        $toDate        = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 10:00:00':Carbon::now();
+        $report_status = $request->report_status;
+        $reports = DB::table('reports')
+                            ->select('reports.*')
+                            ->whereBetween('reports.created_at', [$fromDate, $toDate])
+                            ->Where('sector',Auth::user()->sector)
+                            ->where('reports.report_status',$report_status)
+                            //->whereBetween('reports.report_status', ['Resolved','Pending','FollowUp'])
+                            ->get();
+        // dd($reports);
+        return view('sector.show_report',compact('reports','fromDate','toDate'));
     }
 
 

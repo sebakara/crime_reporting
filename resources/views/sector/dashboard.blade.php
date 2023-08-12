@@ -34,19 +34,19 @@
 <body>
   <!-- ======= Header ======= -->
 <!-- ======= Header ======= -->
-@include('includes.community.header')
+@include('includes.sector.header')
   <!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
 
-@include('includes.community.aside')
+@include('includes.sector.aside')
     <main id="main" class="main">
 
       <div class="pagetitle">
         <h1>Dashboard</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('community.dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('sector.dashboard')}}">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav>
@@ -72,7 +72,7 @@
                     <div class="ps-3">
                       @php
                       $solved       = DB::table('reports')
-                                               ->where('user_id',Auth::user()->id)
+                                               ->where('sector',Auth::user()->sector)
                                                ->where('report_status','Resolved')
                                                ->get();
 
@@ -85,6 +85,32 @@
 
               </div>
             </div><!-- End Sales Card -->
+  <!-- Sales Card -->
+  <div class="col-xxl-4 col-md-6">
+    <div class="card info-card sales-card">
+      <div class="card-body">
+        <h5 class="card-title">Aproved Crime</h5>
+
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+          <div class="ps-3">
+            @php
+            $solved       = DB::table('reports')
+                                     ->where('sector',Auth::user()->sector)
+                                     ->where('report_status','approved')
+                                     ->get();
+
+            $solved_count = $solved->count();
+            @endphp
+            <h6>{{$solved_count}}</h6>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- End Sales Card -->
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
@@ -100,7 +126,7 @@
                     <div class="ps-3">
                     @php
                       $pending       = DB::table('reports')
-                                               ->where('user_id',Auth::user()->id)
+                                               ->where('sector',Auth::user()->sector)
                                                ->where('report_status','Pending')
                                                ->get();
 
@@ -130,7 +156,7 @@
                     <div class="ps-3">
                     @php
                       $follow       = DB::table('reports')
-                                               ->where('user_id',Auth::user()->id)
+                                               ->where('sector',Auth::user()->sector)
                                                ->where('report_status','FollowUp')
                                                ->get();
 

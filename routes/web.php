@@ -80,7 +80,7 @@ Route::get('police/show/report',[App\Http\Controllers\Police\PoliceController::c
 // sector route
 Route::group([ 'as' =>'sector.','prefix'=>'sector','namespace'=>'sector','middleware'=> ['auth']],
 function(){
-    Route::get('dashboard',[App\Http\Controllers\Community\CommunityController::class, 'index'])->name('dashboard');
+    Route::get('dashboard',[App\Http\Controllers\Community\CommunityController::class, 'index_sector'])->name('dashboard');
 
 }
 );
@@ -95,7 +95,6 @@ function(){
 
 Route::get('community/submit/report/',[App\Http\Controllers\Community\CommunityController::class, 'submit_report'])->name('community.submit.report');
 Route::get('community/view/report/',[App\Http\Controllers\Community\CommunityController::class, 'view_report'])->name('community.view.report');
-Route::get('sector/view/report/',[App\Http\Controllers\Community\CommunityController::class, 'sector_view_report'])->name('sector.view.report');
 Route::get('community/edit/report/',[App\Http\Controllers\Community\CommunityController::class, 'edit_report'])->name('community.edit.report');
 Route::get('community/change/password/',[App\Http\Controllers\Community\CommunityController::class, 'change_password'])->name('community.change.password');
 Route::post('community/update/password/',[App\Http\Controllers\Community\CommunityController::class, 'update_password'])->name('community.update.password');
@@ -107,6 +106,12 @@ Route::post('community/update/report/{id}',[App\Http\Controllers\Community\Commu
 Route::post('community/store/report',[App\Http\Controllers\Community\CommunityController::class, 'store_report'])->name('community.store.report');
 Route::get('community/show/report',[App\Http\Controllers\Community\CommunityController::class, 'show_report'])->name('community.show.report');
 Route::get('community/print/report/{id}',[App\Http\Controllers\Community\CommunityController::class, 'print_report'])->name('community.print.report');
+
+
+
+Route::get('sector/view/report/',[App\Http\Controllers\Community\CommunityController::class, 'sector_view_report'])->name('sector.view.report');
+Route::get('sector/show/report/',[App\Http\Controllers\Community\CommunityController::class, 'sector_show_report'])->name('sector.show.report');
+
 
 
 Auth::routes();

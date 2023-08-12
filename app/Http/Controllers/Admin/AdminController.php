@@ -92,6 +92,7 @@ class AdminController extends Controller
         $data['name']        = $request->name;
         $data['email']       = $request->email;
         $data['role_id']     = $role->id;
+        $data['sector']     = $get_sector->sector_name;
         $data['password']    = bcrypt($data['username']);
         $data['user_status'] = 1;
         $data['created_at']  = date('Y-m-d');
@@ -144,6 +145,7 @@ class AdminController extends Controller
         $data['name']        = $request->name;
         $data['email']       = $request->email;
         $data['role_id']     = $role->id;
+        $data['sector']     = $get_sector->sector_name;
         $data['password']    = bcrypt($data['username']);
         $data['user_status'] = 1;
         $data['created_at']  = date('Y-m-d');
@@ -246,6 +248,7 @@ class AdminController extends Controller
             if($user_email){
                  return redirect()->back()->with('success', 'Credentials Already Existed');
             }else{
+                $data['sector']     = $get_sector->sector_name;
                 $community = DB::table('users')->insert($data);
 
                 //GETTING USER ID

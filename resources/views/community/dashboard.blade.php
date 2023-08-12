@@ -91,22 +91,22 @@
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Pending Crime</h5>
+                  <h5 class="card-title">Aproved Crime</h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="fa fa-file" aria-hidden="true"></i>
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </div>
                     <div class="ps-3">
                     @php
-                      $pending       = DB::table('reports')
+                      $aproves       = DB::table('reports')
                                                ->where('user_id',Auth::user()->id)
-                                               ->where('report_status','Pending')
+                                               ->where('report_status','approved')
                                                ->get();
 
-                      $pending_count = $pending->count();
+                      $aproves_count = $aproves->count();
                       @endphp
-                      <h6>{{$pending_count}}</h6>
+                      <h6>{{$aproves_count}}</h6>
 
                     </div>
                   </div>
@@ -115,6 +115,35 @@
               </div>
             </div><!-- End Revenue Card -->
 
+              <!-- Revenue Card -->
+              <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
+  
+                  <div class="card-body">
+                    <h5 class="card-title">Pending Crime</h5>
+  
+                    <div class="d-flex align-items-center">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </div>
+                      <div class="ps-3">
+                      @php
+                        $pending       = DB::table('reports')
+                                                 ->where('user_id',Auth::user()->id)
+                                                 ->where('report_status','Pending')
+                                                 ->get();
+  
+                        $pending_count = $pending->count();
+                        @endphp
+                        <h6>{{$pending_count}}</h6>
+  
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </div><!-- End Revenue Card -->
+  
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
 

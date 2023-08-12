@@ -21,6 +21,7 @@ class CreateReportsTable extends Migration
             $table->string('delivery_to')->nullable();
             $table->string('report_status')->nullable();
             $table->string('comment_status')->nullable();
+            $table->string('sector')->nullable();
             $table->timestamps();
         });
     }
