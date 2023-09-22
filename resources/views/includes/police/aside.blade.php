@@ -25,7 +25,13 @@
           <span>Report</span>
         </a>
       </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('admin.summary_report')}}">
+                    <i class="bi bi-grid"></i>
+                    <span>Summary Report</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
         </ul>
-      </li><!-- End Components Nav -->
+{{--      </li><!-- End Components Nav -->--}}
       <!-- End Forms Nav -->
     </aside><!-- End Sidebar-->

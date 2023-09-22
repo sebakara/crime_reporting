@@ -68,5 +68,12 @@
           <span>Search Location Report</span>
         </a>
       </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link " href="{{route('admin.summary_report')}}">
+                <i class="bi bi-grid"></i>
+                <span>Summary Report</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+    </ul>
       <!-- End Forms Nav -->
     </aside><!-- End Sidebar-->

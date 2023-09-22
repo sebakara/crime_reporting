@@ -56,6 +56,7 @@ Route::post('admin/change/password',[App\Http\Controllers\Admin\AdminController:
 Route::get('admin/get/sectorname/{district_id}',[App\Http\Controllers\Admin\AdminController::class, 'getSectors']);
 Route::get('admin/get/cellname/{sector_id}',[App\Http\Controllers\Admin\AdminController::class, 'getCells']);
 Route::get('admin/show/report',[App\Http\Controllers\Admin\AdminController::class, 'show_report'])->name('admin.show_report');
+Route::get('admin/summary/report',[App\Http\Controllers\Admin\AdminController::class, 'summary_report'])->name('admin.summary_report');
 Route::get('admin/addresss/report',[App\Http\Controllers\Admin\AdminController::class, 'show_address_report'])->name('admin.address_report');
 
 //Police Router

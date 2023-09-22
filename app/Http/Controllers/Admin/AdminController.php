@@ -24,12 +24,12 @@ class AdminController extends Controller
                                 ->where('addresses.sector','Kimihurura')
                                 ->get();
 
-        
+
         $Kimironko     = DB::table('reports')
                                 ->join('addresses','addresses.report_id','reports.id')
                                 ->where('addresses.sector','Kimironko')
                                 ->get();
-        
+
         $kacyiru_count    = $kacyiru->count();
         $Kimihurura_count = $Kimihurura->count();
         $Kimironko_count  = $Kimironko->count();
@@ -99,7 +99,7 @@ class AdminController extends Controller
 
         $sector_officer = DB::table('users')->insert($data);
         if($sector_officer ){
-            //GETTING USER ID 
+            //GETTING USER ID
             $user_id = DB::table('users')->orderBy('id','desc')->first();
             //Save Address
             $address              = array();
@@ -108,7 +108,7 @@ class AdminController extends Controller
             $address['sector']    = $get_sector->sector_name;
             $address['cell']      = $get_cell->cell_name;
             $address= DB::table('addresses')->insert($address);
-            return redirect()->back()->with('success', 'Account Successful Create'); 
+            return redirect()->back()->with('success', 'Account Successful Create');
         }
     }
     public function create_police_account(Request $request){
@@ -152,7 +152,7 @@ class AdminController extends Controller
 
         $polices = DB::table('users')->insert($data);
         if($polices){
-            //GETTING USER ID 
+            //GETTING USER ID
             $user_id = DB::table('users')->orderBy('id','desc')->first();
             //Save Address
             $address              = array();
@@ -161,9 +161,9 @@ class AdminController extends Controller
             $address['sector']    = $get_sector->sector_name;
             $address['cell']      = $get_cell->cell_name;
             $address= DB::table('addresses')->insert($address);
-            return redirect()->back()->with('success', 'Account Successful Create'); 
+            return redirect()->back()->with('success', 'Account Successful Create');
         }
-         
+
     }
 
     public function community_account(){
@@ -205,34 +205,34 @@ class AdminController extends Controller
         $data['created_at']  = date('Y-m-d');
 
         //Getting Address IDS
-       
+
         $request_district_id  = $request->district_id;
         $request_sector_id    = $request->sector_id;
         $request_cell_id      = $request->cell_id;
-        
+
         //Getting District Name, Sector Name , Cell Name
         $get_district = DB::table('districts')
                             ->select('districts.*')
                             ->where('id',$request_district_id)
                             ->first();
-        
+
         $get_sector   = DB::table('sectors')
                             ->select('sectors.*')
                             ->where('id',$request_sector_id)
                             ->first();
 
-        
+
         $get_cell     = DB::table('cells')
                             ->select('cells.*')
                             ->where('id',$request_cell_id)
                             ->first();
 
-        //Image 
+        //Image
 
         $profile_image = $request->profile_image;
 
         if($profile_image){
-            
+
             //Image One
             $image_one_name = hexdec(uniqid()). '.' .$profile_image->getClientOriginalExtension();
             Image::make($profile_image)->resize(300,300)->save(public_path('photo/').$image_one_name); //Save local resources
@@ -264,7 +264,7 @@ class AdminController extends Controller
 
                 $addresses = DB::table('addresses')->insert($address);
                 //dd($addresses);
-                return redirect()->back()->with('success', 'Account Successful Create'); 
+                return redirect()->back()->with('success', 'Account Successful Create');
             }
         }
     }
@@ -318,7 +318,7 @@ class AdminController extends Controller
     }
 
     public function changePassword(){
-        
+
         return view('admin.profile');
     }
 
@@ -336,13 +336,13 @@ class AdminController extends Controller
     public function inactiveStatus($id){
 
         DB::table('users')->where('id',$id)->update(['user_status'=>0]);
-        return redirect()->back()->with('success', 'Status Successful Updated'); 
+        return redirect()->back()->with('success', 'Status Successful Updated');
     }
 
     public function activeStatus($id){
 
         DB::table('users')->where('id',$id)->update(['user_status'=>1]);
-        return redirect()->back()->with('success', 'Status Successful Updated'); 
+        return redirect()->back()->with('success', 'Status Successful Updated');
     }
 
     public function getSectors($district_id){
@@ -350,7 +350,7 @@ class AdminController extends Controller
         $sectorname = DB::table('sectors')
                        ->where('district_id',$district_id)
                        ->get();
-                      
+
         return json_encode($sectorname);
     }
 
@@ -377,13 +377,50 @@ class AdminController extends Controller
 
         return view('admin.show_report',compact('reports','fromDate','toDate'));
     }
+    public function summary_report(Request $request){
+
+//        $fromDate      = $request->has('date')?$request->get('date').' 00:00:00':Carbon::yesterday()->format('Y-m-d').' 00:00:00';
+//        $toDate        = $request->has('to_date')?date('Y-m-d', strtotime($request->input('to_date'). ' + 1 days')).' 23:59:00':Carbon::now();
+        $toDate=$request->to_date;
+            $fromDate = $request->date;
+        $sector = $request->sector;
+        $district = $request->discrict;
+        $cell = $request->cell;
+        $type = $request->type;
+        $report_status = $request->status;
+        $reports = DB::table('reports')
+            ->join('addresses','reports.id','addresses.report_id')
+            ->select('reports.*','addresses.*')
+                ->when($fromDate && $toDate, function ($query, $fromDate, $toDate) {
+                    return $query->whereBetween('reports.created_at', [$fromDate, $toDate]);
+                })
+            ->when($sector, function ($query, $sector) {
+                return $query->where('addresses.sector', $sector);
+            })
+            ->when($district, function ($query, $district) {
+                return $query->where('addresses.district', $district);
+            })
+            ->when($cell, function ($query, $cell) {
+                return $query->where('addresses.cell', $cell);
+            })
+            ->when($type, function ($query, $type) {
+                return $query->where('reports.report_title', $type);
+            })
+            ->when($report_status, function ($query, $report_status) {
+                return $query->where('reports.report_status', $report_status);
+            })
+            ->get();
+        // dd($reports);
+
+        return view('admin.summary_report',compact('reports','fromDate','toDate'));
+    }
 
     public function show_address_report(Request $request){
 
         $districts     = DB::table('districts')->get();
         $sectors       = DB::table('sectors')->get();
         $cells         = DB::table('cells')->get();
-        
+
         $district      = $request->district_id;
         $sector        = $request->sector_id;
         $cell          = $request->cell_id;
@@ -398,14 +435,14 @@ class AdminController extends Controller
                               ->where('cells.id',$cell)
                               ->first();
 
-        
+
         if(!empty($address_report)){
 
             $district_to = $address_report->district_name;
             $sector_to   = $address_report->sector_name;
             $cell_to     = $address_report->cell_name;
-    
-    
+
+
             $reports     = DB::table('reports')
                                 ->join('addresses','reports.id','addresses.report_id')
                                 ->select('reports.*','addresses.*')

@@ -95,10 +95,20 @@
                                         @csrf
                                         <div class="row mb-3">
                                             <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Report
-                                                Title</label>
+                                                Type</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="report_title" type="text" class="form-control"
-                                                    placeholder="Enter Report Title">
+                                                <select class="form-control " name="report_title" id="report_title">
+                                                    <option value="">Select Type</option>
+                                                    <option>Women Violent</option>
+                                                    <option>Sex Violent</option>
+                                                    <option>Accident</option>
+                                                    <option>Drugs</option>
+                                                    <option>Thieves</option>
+                                                    <option>Security Issues</option>
+                                                    <option>Kidnap</option>
+                                                    <option>Alcoholism</option>
+                                                    <option>Others</option>
+                                                </select>
                                             </div>
                                         </div>
 
